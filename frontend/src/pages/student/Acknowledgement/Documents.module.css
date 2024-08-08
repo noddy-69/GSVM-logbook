@@ -1,0 +1,63 @@
+.skip {
+  position: relative;
+  line-height: 120%;
+  display: inline-block;
+  min-width: 31px;
+}
+.iconChevronDown {
+  height: 20px;
+  width: 20px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  object-fit: contain;
+  min-height: 20px;
+}
+.documents,
+.documentsInner,
+.skipParent {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+.skipParent {
+  justify-content: flex-start;
+  gap: 4px;
+}
+.documents,
+.documentsInner {
+  justify-content: flex-end;
+  padding: 0 var(--padding-45xl);
+}
+.documents {
+  width: 100%;
+  position: relative;
+  background-color: var(--base);
+  overflow: hidden;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 0 0 var(--padding-45xl);
+  box-sizing: border-box;
+  gap: 261.5px;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  font-size: var(--text-regular-normal-size);
+  color: var(--grey);
+  font-family: var(--text-regular-normal);
+}
+.year {
+  text-decoration: none;
+  color: var(--grey);
+}
+@media screen and (max-width: 750px) {
+  .documents {
+    gap: var(--gap-112xl);
+  }
+}
+@media screen and (max-width: 450px) {
+  .documents {
+    gap: var(--gap-46xl);
+  }
+}

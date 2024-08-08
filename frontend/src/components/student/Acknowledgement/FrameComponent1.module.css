@@ -1,0 +1,91 @@
+.inputFieldChild {
+  width: 1170px;
+  height: 481px;
+  position: relative;
+  border-radius: var(--br-5xs);
+  border: 1px solid var(--black);
+  box-sizing: border-box;
+  display: none;
+  max-width: 100%;
+}
+.typeHere1 {
+  position: relative;
+  line-height: 155%;
+  display: inline-block;
+  min-width: 129px;
+  z-index: 1;
+}
+.typeHere {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0 var(--padding-7xs);
+}
+.frameChild,
+.frameItem {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  z-index: 1;
+}
+.frameItem {
+  top: 12.5px;
+  left: 14.8px;
+  width: 16px;
+  height: 13.5px;
+  z-index: 2;
+}
+.vectorParent {
+  width: 31.1px;
+  height: 26.2px;
+  position: relative;
+}
+.inputField,
+.inputFieldWrapper {
+  display: flex;
+  justify-content: flex-start;
+  max-width: 100%;
+}
+.inputField {
+  width: 1170px;
+  border-radius: var(--br-5xs);
+  border: 1px solid var(--black);
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: var(--padding-3xl) var(--padding-lg) var(--padding-mini);
+  gap: var(--gap-358xl-3);
+}
+.inputFieldWrapper {
+  align-self: stretch;
+  flex-direction: row;
+  align-items: flex-start;
+  text-align: center;
+  font-size: var(--font-size-5xl);
+  color: var(--grey);
+  font-family: var(--text-regular-normal);
+}
+@media screen and (max-width: 1200px) {
+  .inputField {
+    gap: var(--gap-170xl);
+  }
+}
+@media screen and (max-width: 750px) {
+  .inputField {
+    gap: var(--gap-75xl);
+  }
+}
+@media screen and (max-width: 450px) {
+  .typeHere1 {
+    font-size: var(--font-size-lgi);
+    line-height: 30px;
+  }
+  .inputField {
+    gap: var(--gap-28xl);
+  }
+}

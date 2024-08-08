@@ -1,0 +1,151 @@
+.heading {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  line-height: 58px;
+  font-weight: 700;
+  font-family: inherit;
+}
+.headingWrapper {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0 var(--padding-xl) 0 var(--padding-3xl);
+}
+.frameChild {
+  height: 201px;
+  width: 301px;
+  position: relative;
+  border-radius: var(--br-xs);
+  border: 1px solid var(--black);
+  box-sizing: border-box;
+  display: none;
+}
+.stYear {
+  position: relative;
+  line-height: 150%;
+  display: inline-block;
+  min-width: 117px;
+  z-index: 1;
+}
+.rectangleParent {
+  flex: 0.4826;
+  border-radius: var(--br-xs);
+  border: 1px solid var(--black);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-55xl) var(--padding-68xl);
+  min-width: 126px;
+}
+.ndYear {
+  width: 126px;
+  position: relative;
+  line-height: 150%;
+  display: inline-block;
+  min-width: 126px;
+  z-index: 1;
+}
+.rectangleGroup {
+  flex: 1;
+  border-radius: var(--br-xs);
+  border: 1px solid var(--black);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  padding: var(--padding-55xl) var(--padding-xl);
+  min-width: 126px;
+}
+.rdYear {
+  position: relative;
+  line-height: 150%;
+  display: inline-block;
+  min-width: 118px;
+  z-index: 1;
+}
+.yearSelection {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--gap-21xl);
+  font-size: var(--font-size-13xl);
+  font-family: var(--text-regular-normal);
+}
+.frameParent {
+  width: 980px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: var(--gap-45xl);
+  max-width: 100%;
+}
+.yearSelectionInner {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0 var(--padding-xl);
+  box-sizing: border-box;
+  max-width: 100%;
+  text-align: center;
+  font-size: var(--font-size-29xl);
+  color: var(--black);
+  font-family: var(--font-rokkitt);
+}
+@media screen and (max-width: 975px) {
+  .heading {
+    font-size: var(--font-size-19xl);
+    line-height: 46px;
+  }
+  .ndYear,
+  .rdYear,
+  .stYear {
+    font-size: var(--font-size-7xl);
+    line-height: 38px;
+  }
+  .yearSelection {
+    flex-wrap: wrap;
+  }
+  .frameParent {
+    gap: var(--gap-13xl);
+  }
+}
+@media screen and (max-width: 700px) {
+  .yearSelection {
+    gap: var(--gap-xl);
+  }
+  .frameParent {
+    gap: var(--gap-base);
+  }
+}
+@media screen and (max-width: 450px) {
+  .heading {
+    font-size: var(--font-size-10xl);
+    line-height: 35px;
+  }
+  .stYear {
+    font-size: var(--font-size-lgi);
+    line-height: 29px;
+  }
+  .rectangleParent {
+    padding-left: var(--padding-xl);
+    padding-right: var(--padding-xl);
+    box-sizing: border-box;
+    flex: 1;
+  }
+  .ndYear,
+  .rdYear {
+    font-size: var(--font-size-lgi);
+    line-height: 29px;
+  }
+}

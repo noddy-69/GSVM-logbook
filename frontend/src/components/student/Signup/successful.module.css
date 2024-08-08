@@ -1,0 +1,118 @@
+.componentlottiehttpsassetIcon {
+  height: 154.3px;
+  width: 154.3px;
+  position: relative;
+}
+.animationWrapper {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0 var(--padding-xl) 0 var(--padding-2xl);
+}
+.heading {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  line-height: 58px;
+  font-weight: 700;
+  font-family: inherit;
+}
+.headingWrapper {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0 var(--padding-xl) 0 var(--padding-4xl);
+}
+.text {
+  width: 346px;
+  position: relative;
+  line-height: 32px;
+  display: inline-block;
+}
+.textWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0 var(--padding-48xl);
+}
+.continue {
+  position: relative;
+  line-height: 150%;
+  display: inline-block;
+  min-width: 64px;
+}
+.continueButton {
+  align-self: stretch;
+  border-radius: var(--br-5xs);
+  background-color: var(--color-teal);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  padding: var(--padding-xs) var(--padding-xl);
+  text-align: left;
+  font-size: var(--text-regular-link-size);
+  color: var(--color-white);
+}
+.animationWrapperParent,
+.frameParent {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.frameParent {
+  align-self: stretch;
+  align-items: center;
+  gap: var(--gap-5xl);
+  font-size: var(--font-size-lg);
+  font-family: var(--text-regular-link);
+}
+.animationWrapperParent {
+  width: 480px;
+  align-items: flex-end;
+  gap: var(--gap-29xl-4);
+  max-width: 100%;
+}
+.content {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0 var(--padding-xl);
+  box-sizing: border-box;
+  max-width: 100%;
+  text-align: center;
+  font-size: var(--font-size-29xl);
+  color: var(--black);
+  font-family: var(--font-rokkitt);
+}
+.continueLink {
+  text-decoration: none;
+  width: 400px;
+}
+@media screen and (max-width: 750px) {
+  .heading {
+    font-size: var(--font-size-19xl);
+    line-height: 46px;
+  }
+  .textWrapper {
+    padding-left: var(--padding-14xl);
+    padding-right: var(--padding-14xl);
+    box-sizing: border-box;
+  }
+  .animationWrapperParent {
+    gap: var(--gap-5xl);
+  }
+}
+@media screen and (max-width: 450px) {
+  .heading {
+    font-size: var(--font-size-10xl);
+    line-height: 35px;
+  }
+}

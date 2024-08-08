@@ -1,0 +1,36 @@
+.name,
+.placeholder {
+  align-self: stretch;
+  position: relative;
+  line-height: 150%;
+}
+.placeholder {
+  width: 341px;
+  display: none;
+  max-width: 100%;
+}
+.nameInput,
+.textInput {
+  align-self: stretch;
+  display: flex;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+.textinput {
+  width: 400px;
+  height: 40px;
+  background-color: var(--color-floralwhite);
+  text-align: center;
+  font-size: 16px;
+}
+.nameInput {
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 0 var(--padding-5xs);
+  gap: var(--gap-5xs);
+  text-align: left;
+  font-size: var(--text-regular-normal-size);
+  color: var(--black);
+  font-family: var(--text-regular-normal);
+}

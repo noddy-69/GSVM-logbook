@@ -1,0 +1,192 @@
+.iNT {
+  margin: 0;
+  width: 532px;
+  position: relative;
+  font-size: inherit;
+  line-height: 58px;
+  font-weight: 700;
+  font-family: inherit;
+  display: inline-block;
+  max-width: 100%;
+}
+.iNTRODUCTIONWrapper {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0 var(--padding-xl);
+  box-sizing: border-box;
+  max-width: 100%;
+}
+.describeInBrief {
+  align-self: stretch;
+  position: relative;
+  font-size: var(--font-size-lg);
+  line-height: 155%;
+  font-family: var(--text-regular-normal);
+}
+.frameParent,
+.introductionContainer {
+  display: flex;
+  align-items: flex-start;
+  max-width: 100%;
+}
+.frameParent {
+  width: 882px;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: var(--gap-5xl);
+}
+.introductionContainer {
+  align-self: stretch;
+  flex-direction: row;
+  justify-content: center;
+  padding: 0 91px var(--padding-31xl) var(--padding-xl);
+  box-sizing: border-box;
+}
+.buttonDescription {
+  position: relative;
+  line-height: 155%;
+  font-weight: 600;
+  display: inline-block;
+  min-width: 64px;
+}
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0 0 0 var(--padding-xs);
+}
+.buttonDescriptionParent,
+.introductionContainerParent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-17xl);
+  font-size: var(--font-size-xl);
+  color: var(--grey);
+  font-family: var(--text-regular-normal);
+}
+.introductionContainerParent {
+  flex: 1;
+  align-items: flex-end;
+  gap: var(--gap-sm);
+  max-width: 100%;
+  text-align: center;
+  font-size: var(--font-size-29xl);
+  color: var(--black);
+  font-family: var(--font-rokkitt);
+}
+.introduction,
+.introductionInner {
+  display: flex;
+  box-sizing: border-box;
+}
+.introductionInner {
+  width: 1369px;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 0 var(--padding-45xl);
+  max-width: 100%;
+}
+.introduction {
+  width: 100%;
+  position: relative;
+  background-color: var(--base);
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 0 0 var(--padding-45xl);
+  gap: var(--gap-54xl);
+  line-height: normal;
+  letter-spacing: normal;
+}
+
+.textarea {
+  align-self: center;
+  background-color: var(--color-floralwhite);
+  border-width: 2px;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 26px;
+}
+.textarea_container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto;
+}
+
+textarea {
+  width: 100%;
+  max-height: 481px;
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+#char-count {
+  text-align: right;
+  margin-top: 5px;
+  font-size: 14px;
+  color: #555;
+}
+.signupButton {
+  align-self: stretch;
+  border-radius: var(--br-5xs);
+  background-color: var(--color-teal);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  padding: var(--padding-xs) var(--padding-xl);
+  white-space: nowrap;
+  cursor: pointer;
+  color: #ffffff;
+  font-size: var(--text-regular-normal-size);
+  line-height: 150%;
+  font-family: var(--text-regular-normal);
+}
+@media screen and (max-width: 1200px) {
+  .introductionInner {
+    padding-left: var(--padding-13xl);
+    padding-right: var(--padding-13xl);
+    box-sizing: border-box;
+  }
+}
+@media screen and (max-width: 1050px) {
+  .iNT {
+    font-size: var(--font-size-19xl);
+    line-height: 46px;
+  }
+  .introductionContainer {
+    padding-right: var(--padding-26xl);
+    box-sizing: border-box;
+  }
+}
+@media screen and (max-width: 750px) {
+  .introductionContainer {
+    padding-right: var(--padding-3xl);
+    box-sizing: border-box;
+  }
+  .introduction {
+    gap: var(--gap-17xl);
+  }
+}
+@media screen and (max-width: 450px) {
+  .iNT {
+    font-size: var(--font-size-10xl);
+    line-height: 35px;
+  }
+  .buttonDescription {
+    font-size: var(--text-regular-normal-size);
+    line-height: 25px;
+  }
+  .introduction {
+    gap: var(--gap-lg);
+  }
+}

@@ -1,0 +1,171 @@
+.heading {
+  margin: 0;
+  position: relative;
+  font-size: var(--font-size-29xl);
+  line-height: 58px;
+  font-weight: 700;
+  font-family: var(--font-rokkitt);
+  color: var(--black);
+  text-align: center;
+  white-space: nowrap;
+}
+.termsContent {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0 var(--padding-xl) 0 var(--padding-3xl);
+}
+.text {
+  align-self: stretch;
+  position: relative;
+  font-size: var(--font-size-lg);
+  line-height: 150%;
+  font-family: var(--text-regular-normal);
+  color: var(--black);
+  text-align: center;
+}
+.submission,
+.terms {
+  display: flex;
+  max-width: 100%;
+}
+.terms {
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: var(--gap-xl);
+}
+.submission {
+  align-self: stretch;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 0 var(--padding-50xl) var(--padding-5xs) var(--padding-51xl);
+  box-sizing: border-box;
+}
+.dateOfBirth,
+.ddmmyyyy {
+  position: relative;
+  font-size: var(--text-regular-normal-size);
+  line-height: 150%;
+  font-family: var(--text-regular-normal);
+  text-align: left;
+}
+.dateOfBirth {
+  align-self: stretch;
+  color: var(--black);
+}
+.ddmmyyyy {
+  color: var(--color-dimgray);
+  display: inline-block;
+  min-width: 102px;
+}
+.ddmmyyyyWrapper,
+.inputFields {
+  align-self: stretch;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.ddmmyyyyWrapper {
+  border-radius: var(--br-5xs);
+  border: 1px solid var(--black);
+  flex-direction: row;
+  padding: var(--padding-3xs) var(--padding-xs);
+}
+.inputFields {
+  flex-direction: column;
+  gap: var(--gap-5xs);
+}
+.signUp {
+  position: relative;
+  font-size: var(--text-regular-normal-size);
+  line-height: 150%;
+  font-family: var(--text-regular-normal);
+  color: var(--color-white);
+  text-align: left;
+  display: inline-block;
+  min-width: 55px;
+}
+.signupButton {
+  align-self: stretch;
+  border-radius: var(--br-5xs);
+  background-color: var(--color-teal);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  padding: var(--padding-xs) var(--padding-xl);
+  white-space: nowrap;
+  cursor: pointer;
+  color: #ffffff;
+  font-size: var(--text-regular-normal-size);
+  line-height: 150%;
+  font-family: var(--text-regular-normal);
+}
+.formFields {
+  margin: 0;
+  width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-5xl);
+  max-width: 100%;
+}
+.textlabel {
+  display: flex;
+  justify-content: flex-start;
+}
+.textinput {
+  text-align: left;
+  background-color: #F7F5ED;
+  width: 480px;
+  height: 40px;
+  font-size: 20px;
+  padding: 10px;
+  border-width: 2px;
+  border-radius: 8px;
+}
+select{
+  padding-left: 10px;
+  border-width: 2px;
+  border-radius:5px;
+  width:480px;
+  height: 40px;
+  background-color:var(--color-floralwhite);
+}
+
+select:focus{
+  outline:none;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+@media screen and (max-width: 750px) {
+  .heading {
+    font-size: var(--font-size-19xl);
+    line-height: 46px;
+  }
+  .submission {
+    padding-left: var(--padding-16xl);
+    padding-right: var(--padding-15xl);
+    box-sizing: border-box;
+  }
+}
+@media screen and (max-width: 450px) {
+  .heading {
+    font-size: var(--font-size-10xl);
+    line-height: 35px;
+  }
+}
