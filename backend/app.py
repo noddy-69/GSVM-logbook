@@ -86,6 +86,30 @@ def signup():
         db.session.rollback()
         return jsonify({'message': 'User with this email already exists'}), 409
 
+@app.route('/facultysignupclick', methods=['POST'])
+def facultysignup():
+    data = request.get_json()
+    
+    name = data.get('name')
+    email = data.get('email')
+    password = data.get('password')
+    department = data.get('department')
+    designation = data.get('designation')
+
+    if not name or not email or not password:
+        return jsonify({'message': 'Name, email, and password are required'}), 400
+
+    hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
+    new_user = Faculty(name=name, email=email, password=hashed_password, department=department, designation=designation )
+
+    try:
+        db.session.add(new_user)
+        db.session.commit()
+        return jsonify({'message': 'User registered successfully'}), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'message': 'User with this email already exists'}), 409
+    
 email = None
 @app.route('/loginclick', methods=['POST'])
 def login():
@@ -95,27 +119,43 @@ def login():
     password = data.get('password')
 
     user = User.query.filter_by(email=email).first()
+    faculty = Faculty.query.filter_by(email=email).first()
     if user and check_password_hash(user.password, password):
-        return jsonify(['Yes'])
+        return jsonify(['student'])
+    elif faculty and check_password_hash(faculty.password, password):
+        return jsonify(['faculty'])
     else:
         return jsonify(['No'])
 
+email1 = None
 @app.route('/forgotpasswordclick', methods=['POST'])
 def forgot_password():
-    global email
+    global email1
     data = request.get_json()
     email1 = data.get('email')
     if not email1:
         return jsonify({'message': 'Email is required'}), 400
 
     user = User.query.filter_by(email=email1).first()
+    faculty = Faculty.query.filter_by(email=email1).first()
     if user:
         otp = generate_otp()
         user.otp = otp
         db.session.commit()
 
         # Send OTP via email
-        msg = Message('Password Reset OTP', sender=app.config['MAIL_USERNAME'], recipients=[email])
+        msg = Message('Password Reset OTP', sender=app.config['MAIL_USERNAME'], recipients=[email1])
+        msg.body = f'Your OTP for password reset is {otp}'
+        mail.send(msg)
+
+        return jsonify({'message': 'OTP sent to email', 'otp': otp}), 200
+    elif faculty:
+        otp = generate_otp()
+        faculty.otp = otp
+        db.session.commit()
+
+        # Send OTP via email
+        msg = Message('Password Reset OTP', sender=app.config['MAIL_USERNAME'], recipients=[email1])
         msg.body = f'Your OTP for password reset is {otp}'
         mail.send(msg)
 
@@ -125,31 +165,42 @@ def forgot_password():
 
 @app.route('/verificationclick', methods=['POST'])
 def verify():
-    global email
+    global email1
     data = request.get_json()
     digit1 = data.get('digit1')
     digit2 = data.get('digit2')
     digit3 = data.get('digit3')
     digit4 = data.get('digit4')
 
-    user = User.query.filter_by(email=email).first()
+    user = User.query.filter_by(email=email1).first()
+    faculty = Faculty.query.filter_by(email=email1).first()
+
     user_otp = int(f'{digit1}{digit2}{digit3}{digit4}')
 
-    if user_otp == user.otp:
-        return "Yes"
+    if user:
+        if user_otp == user.otp:
+            return "Yes"
+    elif faculty:
+        if user_otp == faculty.otp:
+            return "Yes"
     else:
         return "No"
     
 @app.route('/resendcode', methods=['POST'])
 def resend():
-    global email
+    global email1
     otp = generate_otp()
-    user = User.query.filter_by(email=email).first()
-    user.otp = otp
-    db.session.commit()
+    user = User.query.filter_by(email=email1).first()
+    faculty = Faculty.query.filter_by(email=email1).first()
+    if user:
+        user.otp = otp
+        db.session.commit()
+    elif faculty:
+        faculty.otp = otp
+        db.session.commit()
 
     # Send OTP via email
-    msg = Message('Password Reset OTP', sender=app.config['MAIL_USERNAME'], recipients=[email])
+    msg = Message('Password Reset OTP', sender=app.config['MAIL_USERNAME'], recipients=[email1])
     msg.body = f'Your OTP for password reset is {otp}'
     mail.send(msg)
 
@@ -157,18 +208,23 @@ def resend():
 
 @app.route('/updateclick', methods=['POST'])
 def new_pass():
-    global email
+    global email1
     data = request.get_json()
     password = data.get('pass')
     password1 = data.get('pass1')
-    user = User.query.filter_by(email=email).first()
+    user = User.query.filter_by(email=email1).first()
+    faculty = Faculty.query.filter_by(email=email1).first()
 
     if password == password1:
         hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
-        user.password = hashed_password
-        db.session.commit()
-
-        return jsonify('Yes')
+        if user:
+            user.password = hashed_password
+            db.session.commit()
+            return jsonify('Yes')
+        elif faculty:
+            faculty.password = hashed_password
+            db.session.commit()
+            return jsonify('Yes')
     else:
         return jsonify('No')
     

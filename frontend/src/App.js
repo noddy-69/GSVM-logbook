@@ -17,6 +17,7 @@ import YearSelection from "./pages/student/Acknowledgement/YearSelection";
 import Introduction from "./pages/student/Acknowledgement/Introduction";
 import Documents from "./pages/student/Acknowledgement/Documents";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import FacultySignUp from "./pages/faculty/Signup/SignUp";
 
 function App() {
   const action = useNavigationType();
@@ -78,6 +79,10 @@ function App() {
         title = "";
         metaDescription = "";
         break;
+      case "/fsignup":
+        title = "";
+        metaDescription = "";
+        break;
     }
 
     if (title) {
@@ -107,6 +112,7 @@ function App() {
       <Route path="/year-selection" element={<YearSelection />} />
       <Route path="/introduction" element={<Introduction />} />
       <Route path="/documents" element={<Documents />} />
+      <Route path="/fsignup" element={<FacultySignUp />} />
     </Routes>
   );
 }
