@@ -1,0 +1,91 @@
+.logoChild,
+.logoHeaderChild {
+  position: relative;
+  display: none;
+}
+.logoHeaderChild {
+  height: 96px;
+  width: 1440px;
+  background-color: var(--blue);
+  max-width: 100%;
+}
+.logoChild {
+  height: 74px;
+  width: 74px;
+  border-radius: var(--br-46xl);
+  background-color: var(--white);
+}
+.untitledDesign11Icon {
+  height: 74px;
+  width: 49.3px;
+  position: relative;
+  border-radius: var(--br-6xl);
+  object-fit: cover;
+  z-index: 1;
+}
+.logo {
+  height: 74px;
+  width: 74px;
+  border-radius: var(--br-46xl);
+  background-color: var(--white);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0 var(--padding-xs);
+  box-sizing: border-box;
+  z-index: 1;
+}
+.heading {
+  margin: 0;
+  align-self: stretch;
+  position: relative;
+  font-size: inherit;
+  line-height: 29px;
+  font-weight: 700;
+  font-family: inherit;
+  white-space: nowrap;
+  z-index: 1;
+}
+.logoHeader,
+.pageHeading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+.pageHeading {
+  width: 353px;
+  flex-direction: column;
+  padding: var(--padding-3xl) 0 0;
+}
+.logoHeader {
+  align-self: stretch;
+  background-color: var(--blue);
+  flex-direction: row;
+  padding: var(--padding-2xs) var(--padding-37xl);
+  gap: var(--gap-5xl);
+  top: 0;
+  z-index: 99;
+  position: sticky;
+  text-align: center;
+  font-size: var(--font-size-5xl);
+  color: var(--white);
+  font-family: var(--font-rokkitt);
+}
+@media screen and (max-width: 800px) {
+  .logoHeader {
+    padding-left: var(--padding-9xl);
+    padding-right: var(--padding-9xl);
+    box-sizing: border-box;
+  }
+}
+@media screen and (max-width: 450px) {
+  .heading {
+    display: none;
+  }
+  .pageHeading {
+    width: 0;
+  }
+}

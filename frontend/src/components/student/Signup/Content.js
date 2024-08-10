@@ -16,8 +16,11 @@ const LoginForm = () => {
     try {
       const response = await axios.post('http://127.0.0.1:5000/loginclick', { email, password });
       console.log(response.data);
-      if (response.data == 'Yes') {
+      if (response.data == 'student') {
         navigate('/documents');
+      }
+      else if (response.data == 'faculty') {
+        navigate('/year-selection');
       }
       else {
         console.log("wrong email");

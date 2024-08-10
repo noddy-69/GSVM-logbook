@@ -102,6 +102,10 @@
   color: var(--black);
   font-family: var(--font-rokkitt);
 }
+.year {
+  text-decoration: none;
+  color: black;
+}
 @media screen and (max-width: 975px) {
   .heading {
     font-size: var(--font-size-19xl);

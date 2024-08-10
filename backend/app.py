@@ -56,6 +56,10 @@ class Faculty(db.Model):
 
     otp = db.Column(db.Integer, nullable=False, default=0)
 
+class MD_pathology_1st_year(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    index_item = db.Column(db.String(150), nullable=False)
+
 # Generate OTP
 def generate_otp():
     return random.randint(1000,9999)
@@ -305,6 +309,31 @@ def introduction1():
     db.session.commit()
 
     return jsonify({'introduction': f'{intro}'})
+
+
+
+
+
+
+
+
+
+@app.route('/year-index', methods=['GET'])
+def year_index():
+    for i in ['Clinical Work','Procedures Done','District Residency Program','Academic Activities','Group Discussion Presentation / Seminar / Self Directed Learning / Guest Lecture / Grand Round']:
+        existing_item = MD_pathology_1st_year.query.filter_by(index_item=i).first()
+
+        if not existing_item:
+            item = MD_pathology_1st_year(index_item=i)
+            db.session.add(item)
+    
+    db.session.commit()
+
+    items = MD_pathology_1st_year.query.all()
+
+    items_list = [{"id": index_i.id, "index_item": index_i.index_item} for index_i in items]
+
+    return jsonify(items_list)
 
 if __name__ == '__main__':
     with app.app_context():

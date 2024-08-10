@@ -1,0 +1,227 @@
+.heading {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  line-height: 58px;
+  font-weight: 700;
+  font-family: inherit;
+  display: inline-block;
+  max-width: 100%;
+}
+.enterInThe {
+  align-self: stretch;
+  position: relative;
+  font-size: var(--font-size-lg);
+  line-height: 155%;
+  font-family: var(--text-regular-normal);
+}
+.headingParent {
+  width: 847px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-lg);
+  max-width: 100%;
+}
+.separator,
+.sno {
+  position: relative;
+  line-height: 150%;
+  display: inline-block;
+}
+.sno {
+  font-weight: 600;
+  min-width: 41px;
+}
+.separator {
+  min-width: 18px;
+}
+.emptyCellOne {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0 0 var(--padding-29xl) var(--padding-4xl);
+}
+.typeCell {
+  flex-direction: column;
+  gap: var(--gap-61xl);
+}
+.sNORow,
+.typeCell,
+.typeRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.typeRow {
+  flex-direction: row;
+  padding: 0 0 0 var(--padding-4xl);
+}
+.sNORow {
+  flex-direction: column;
+  gap: var(--gap-13xl);
+}
+.dateHeaders,
+.dateHeadersWrapper {
+  display: flex;
+  align-items: flex-start;
+  max-width: 100%;
+}
+.dateHeaders {
+  width: 412px;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: var(--gap-xl);
+}
+.dateHeadersWrapper {
+  width: 456px;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 0 0 112px;
+  box-sizing: border-box;
+  min-height: 1244px;
+}
+.diagnosis {
+  position: relative;
+  line-height: 150%;
+  font-weight: 600;
+  display: inline-block;
+  min-width: 71px;
+}
+.diagnosisInput,
+.diagnosisInputWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 100%;
+}
+.diagnosisInput {
+  width: 397px;
+  gap: var(--gap-xl);
+}
+.diagnosisInputWrapper {
+  flex: 1;
+  padding: 0 0 81px;
+  box-sizing: border-box;
+  min-width: 316px;
+  min-height: 1244px;
+}
+.frameChild {
+  width: 0;
+  height: 685px;
+  position: relative;
+  object-fit: contain;
+}
+.vectorWrapper {
+  height: 1200px;
+  width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.frameGroup {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: center;
+  gap: var(--gap-xl);
+  max-width: 100%;
+  font-size: var(--text-regular-normal-size);
+  font-family: var(--text-regular-normal);
+}
+.clinicalWorkEmergencyInner,
+.frameParent {
+  display: flex;
+  align-items: flex-start;
+  max-width: 100%;
+}
+.frameParent {
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: var(--gap-45xl);
+  text-align: left;
+  font-size: var(--font-size-29xl);
+  color: var(--black);
+  font-family: var(--font-rokkitt);
+}
+.clinicalWorkEmergencyInner {
+  width: 1388px;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 0 var(--padding-25xl);
+  box-sizing: border-box;
+}
+.clinicalWorkEmergency {
+  width: 100%;
+  position: relative;
+  background-color: var(--base);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 0 0 var(--padding-45xl);
+  box-sizing: border-box;
+  gap: var(--gap-53xl);
+  line-height: normal;
+  letter-spacing: normal;
+}
+@media screen and (max-width: 1200px) {
+  .dateHeadersWrapper {
+    padding-bottom: 73px;
+    box-sizing: border-box;
+  }
+  .diagnosisInputWrapper {
+    padding-bottom: 53px;
+    box-sizing: border-box;
+  }
+  .clinicalWorkEmergencyInner {
+    padding-left: var(--padding-3xl);
+    padding-right: var(--padding-3xl);
+    box-sizing: border-box;
+  }
+}
+@media screen and (max-width: 1050px) {
+  .heading {
+    font-size: var(--font-size-19xl);
+    line-height: 46px;
+  }
+}
+@media screen and (max-width: 750px) {
+  .dateHeadersWrapper {
+    padding-bottom: 47px;
+    box-sizing: border-box;
+  }
+  .diagnosisInputWrapper {
+    padding-bottom: 34px;
+    box-sizing: border-box;
+  }
+  .frameParent {
+    gap: var(--gap-13xl);
+  }
+  .clinicalWorkEmergency {
+    gap: var(--gap-17xl);
+  }
+}
+@media screen and (max-width: 450px) {
+  .heading {
+    font-size: var(--font-size-10xl);
+    line-height: 35px;
+  }
+  .dateHeaders {
+    flex-wrap: wrap;
+  }
+  .frameParent {
+    gap: var(--gap-base);
+  }
+  .clinicalWorkEmergency {
+    gap: var(--gap-lg);
+  }
+}

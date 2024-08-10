@@ -9,10 +9,12 @@ const FrameComponent2 = ({ className = "" }) => {
           <h3 className={styles.heading}>Choose your year</h3>
         </div>
         <div className={styles.yearSelection}>
+          <a href="/year-index" className={styles.year}>
           <div className={styles.rectangleParent}>
             <div className={styles.frameChild} />
             <div className={styles.stYear}>1st Year</div>
           </div>
+          </a>
           <div className={styles.rectangleGroup}>
             <div className={styles.frameChild} />
             <div className={styles.ndYear}>2nd Year</div>

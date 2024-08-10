@@ -1,0 +1,108 @@
+.headerChild,
+.logoChild {
+  position: relative;
+  display: none;
+}
+.headerChild {
+  height: 96px;
+  width: 1440px;
+  background-color: var(--blue);
+  max-width: 100%;
+}
+.logoChild {
+  height: 74px;
+  width: 74px;
+  border-radius: var(--br-46xl);
+  background-color: var(--white);
+}
+.untitledDesign11Icon {
+  height: 74px;
+  width: 49.3px;
+  position: relative;
+  border-radius: var(--br-6xl);
+  object-fit: cover;
+  z-index: 1;
+}
+.logo {
+  height: 74px;
+  width: 74px;
+  border-radius: var(--br-46xl);
+  background-color: var(--white);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0 var(--padding-xs);
+  box-sizing: border-box;
+  z-index: 1;
+}
+.heading {
+  align-self: stretch;
+  position: relative;
+  line-height: 29px;
+  white-space: nowrap;
+  z-index: 1;
+}
+.headingWrapper {
+  width: 353px;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: var(--padding-3xl) 0 0;
+  max-width: 100%;
+}
+.header,
+.headingWrapper,
+.yearSelection {
+  display: flex;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+.header {
+  align-self: stretch;
+  background-color: var(--blue);
+  flex-direction: row;
+  align-items: flex-start;
+  padding: var(--padding-2xs) var(--padding-37xl);
+  gap: var(--gap-5xl);
+  top: 0;
+  z-index: 99;
+  position: sticky;
+  max-width: 100%;
+  text-align: center;
+  font-size: var(--font-size-5xl);
+  color: var(--white);
+  font-family: var(--font-rokkitt);
+}
+.yearSelection {
+  width: 100%;
+  position: relative;
+  background-color: var(--base);
+  overflow: hidden;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 0 0 var(--padding-45xl);
+  gap: 240px;
+  line-height: normal;
+  letter-spacing: normal;
+}
+@media screen and (max-width: 750px) {
+  .header {
+    padding-left: var(--padding-9xl);
+    padding-right: var(--padding-9xl);
+    box-sizing: border-box;
+  }
+  .yearSelection {
+    gap: 120px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .heading {
+    display: none;
+  }
+  .headingWrapper {
+    width: 0;
+  }
+  .yearSelection {
+    gap: 60px;
+  }
+}

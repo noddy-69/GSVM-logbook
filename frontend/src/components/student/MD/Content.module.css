@@ -1,0 +1,190 @@
+.heading {
+  margin: 0;
+  width: 166px;
+  position: relative;
+  font-size: inherit;
+  line-height: 58px;
+  font-weight: 700;
+  font-family: inherit;
+  display: inline-block;
+}
+.selectionDetails {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0 var(--padding-xl);
+}
+.selectYourLog {
+  position: relative;
+  font-size: var(--font-size-lg);
+  line-height: 28px;
+  font-family: var(--text-regular-normal);
+}
+.selectionItems {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-5xl);
+}
+.selectionItemsWrapper {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0 var(--padding-xl);
+}
+.entriesTableChild {
+  height: 201px;
+  width: 301px;
+  position: relative;
+  border-radius: var(--br-xs);
+  border: 1px solid var(--black);
+  box-sizing: border-box;
+  display: none;
+}
+.entries {
+  position: relative;
+  line-height: 150%;
+  display: inline-block;
+  min-width: 99px;
+  z-index: 1;
+}
+.entriesTable {
+  flex: 1;
+  border-radius: var(--br-xs);
+  border: 1px solid var(--black);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  padding: var(--padding-55xl) var(--padding-xl) var(--padding-55xl)
+    var(--padding-2xl);
+  min-width: 195px;
+}
+.tableOverview {
+  flex: 1;
+  position: relative;
+  line-height: 150%;
+  z-index: 1;
+}
+.entriesTable1,
+.tablePreview {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+.entriesTable1 {
+  flex: 0.6887;
+  border-radius: var(--br-xs);
+  border: 1px solid var(--black);
+  box-sizing: border-box;
+  justify-content: flex-start;
+  padding: var(--padding-31xl) var(--padding-41xl) var(--padding-31xl)
+    var(--padding-42xl);
+  min-width: 195px;
+}
+.tablePreview {
+  align-self: stretch;
+  justify-content: center;
+  gap: var(--gap-21xl);
+  font-size: var(--font-size-13xl);
+  font-family: var(--text-regular-normal);
+}
+.fieldOptions {
+  width: 640px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-45xl);
+}
+.fieldOptions,
+.fieldSelector,
+.logbookSelection {
+  display: flex;
+  justify-content: flex-start;
+  max-width: 100%;
+}
+.fieldSelector {
+  align-self: stretch;
+  flex-direction: row;
+  align-items: flex-start;
+}
+.logbookSelection {
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--gap-204xl);
+}
+.content {
+  width: 1103px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 0 var(--padding-44xl);
+  box-sizing: border-box;
+  max-width: 100%;
+  text-align: center;
+  font-size: var(--font-size-29xl);
+  color: var(--black);
+  font-family: var(--font-rokkitt);
+}
+@media screen and (max-width: 1100px) {
+  .content {
+    padding-left: var(--padding-12xl);
+    padding-right: var(--padding-12xl);
+    box-sizing: border-box;
+  }
+}
+@media screen and (max-width: 1025px) {
+  .heading {
+    font-size: var(--font-size-19xl);
+    line-height: 46px;
+  }
+  .entries,
+  .tableOverview {
+    font-size: var(--font-size-7xl);
+    line-height: 38px;
+  }
+  .logbookSelection {
+    gap: var(--gap-92xl);
+  }
+}
+@media screen and (max-width: 750px) {
+  .entriesTable,
+  .entriesTable1 {
+    flex: 1;
+  }
+  .tablePreview {
+    flex-wrap: wrap;
+    gap: var(--gap-xl);
+  }
+  .fieldOptions {
+    gap: var(--gap-13xl);
+  }
+  .logbookSelection {
+    gap: var(--gap-37xl);
+  }
+}
+@media screen and (max-width: 450px) {
+  .heading {
+    font-size: var(--font-size-10xl);
+    line-height: 35px;
+  }
+  .entries,
+  .tableOverview {
+    font-size: var(--font-size-lgi);
+    line-height: 29px;
+  }
+  .entriesTable1 {
+    padding-left: var(--padding-xl);
+    padding-right: var(--padding-xl);
+    box-sizing: border-box;
+  }
+  .fieldOptions {
+    gap: var(--gap-base);
+  }
+}

@@ -19,6 +19,12 @@ import Documents from "./pages/student/Acknowledgement/Documents";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import FacultySignUp from "./pages/faculty/Signup/SignUp";
 
+import YearIndex from "./pages/student/MD/YearIndex";
+import ClinicalWorkHistoryTaking from "./pages/student/MD/ClinicalWorkHistoryTaking";
+import LogbookField from "./pages/student/MD/LogbookField";
+import ClinicalWorkEmergency from "./pages/student/MD/ClinicalWorkEmergency";
+import ClinicalWorkGeneralPhysic from "./pages/student/MD/ClinicalWorkGeneralPhysic";
+
 function App() {
   const action = useNavigationType();
   const location = useLocation();
@@ -79,6 +85,29 @@ function App() {
         title = "";
         metaDescription = "";
         break;
+
+
+      
+      case "/year-index":
+        title = "";
+        metaDescription = "";
+        break;
+      case "/logbook-field":
+        title = "";
+        metaDescription = "";
+        break;
+      case "/clinical-work-historytaking":
+        title = "";
+        metaDescription = "";
+        break;
+      case "/clinical-work-emergency":
+        title = "";
+        metaDescription = "";
+        break;
+      case "/clinical-work-general-physical-examination":
+        title = "";
+        metaDescription = "";
+        break;
       case "/fsignup":
         title = "";
         metaDescription = "";
@@ -113,6 +142,12 @@ function App() {
       <Route path="/introduction" element={<Introduction />} />
       <Route path="/documents" element={<Documents />} />
       <Route path="/fsignup" element={<FacultySignUp />} />
+
+      <Route path="/year-index" element={<YearIndex />} />
+      <Route path="/logbook-field" element={<LogbookField />} />
+      <Route path="/clinical-work-historytaking" element={<ClinicalWorkHistoryTaking />} />
+      <Route path="/clinical-work-emergency" element={<ClinicalWorkEmergency />} />
+      <Route path="/clinical-work-general-physical-examination" element={<ClinicalWorkGeneralPhysic />} />
     </Routes>
   );
 }

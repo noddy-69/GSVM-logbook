@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from "prop-types";
 import styles from "./FormFields.module.css";
 import axios from "axios";
@@ -9,12 +10,14 @@ const SignupForm = () => {
   const [password, setPassword] = useState('');
   const [department, setDepartment] = useState('');
   const [designation, setDesignation] = useState('');
+  const navigate = useNavigate();
 
   const handlefacultysignup = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post('http://127.0.0.1:5000/facultysignupclick', { name, email, password, department, designation });
       console.log(response.data);
+      navigate('/login');
     } catch (error) {
       console.error('Error logging in:', error);
     }

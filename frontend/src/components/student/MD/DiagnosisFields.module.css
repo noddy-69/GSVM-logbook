@@ -1,0 +1,41 @@
+.typeHere {
+  position: relative;
+  line-height: 150%;
+  display: inline-block;
+  min-width: 82px;
+}
+.diagnosisInputs {
+  align-self: stretch;
+  height: 49px;
+  border-radius: var(--br-9xs);
+  border: 1px solid var(--grey);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-xs) var(--padding-base);
+  white-space: nowrap;
+}
+.maximum50Words {
+  position: relative;
+  font-size: var(--font-size-xs);
+  line-height: 19px;
+  color: var(--color-darkgray-100);
+  text-align: right;
+  display: inline-block;
+  min-width: 111px;
+}
+.diagnosisFields {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 0 0 var(--padding-8xs);
+  gap: var(--gap-xs);
+  text-align: left;
+  font-size: var(--text-regular-normal-size);
+  color: var(--grey);
+  font-family: var(--text-regular-normal);
+}
