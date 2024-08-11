@@ -24,6 +24,7 @@ import ClinicalWorkHistoryTaking from "./pages/student/MD/ClinicalWorkHistoryTak
 import LogbookField from "./pages/student/MD/LogbookField";
 import ClinicalWorkEmergency from "./pages/student/MD/ClinicalWorkEmergency";
 import ClinicalWorkGeneralPhysic from "./pages/student/MD/ClinicalWorkGeneralPhysic";
+import YearIndex1 from "./pages/student/MD/YearIndex1";
 
 function App() {
   const action = useNavigationType();
@@ -92,6 +93,10 @@ function App() {
         title = "";
         metaDescription = "";
         break;
+      case "/year-index1":
+        title = "";
+        metaDescription = "";
+        break;
       case "/logbook-field":
         title = "";
         metaDescription = "";
@@ -144,6 +149,7 @@ function App() {
       <Route path="/fsignup" element={<FacultySignUp />} />
 
       <Route path="/year-index" element={<YearIndex />} />
+      <Route path="/year-index1" element={<YearIndex1 />} />
       <Route path="/logbook-field" element={<LogbookField />} />
       <Route path="/clinical-work-historytaking" element={<ClinicalWorkHistoryTaking />} />
       <Route path="/clinical-work-emergency" element={<ClinicalWorkEmergency />} />

@@ -45,6 +45,8 @@ class User(db.Model):
     introduction = db.Column(db.String(700), nullable=False, default=0)
 
     otp = db.Column(db.Integer, nullable=False, default=0)
+    logbook_field = db.Column(db.String(150), nullable=False, default=0)
+    logbook_field1 = db.Column(db.String(150), nullable=False, default=0)
 
 class Faculty(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -57,6 +59,10 @@ class Faculty(db.Model):
     otp = db.Column(db.Integer, nullable=False, default=0)
 
 class MD_pathology_1st_year(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    index_item = db.Column(db.String(150), nullable=False)
+
+class MD_pathology_1st_year_Clinical_Work(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     index_item = db.Column(db.String(150), nullable=False)
 
@@ -334,6 +340,49 @@ def year_index():
     items_list = [{"id": index_i.id, "index_item": index_i.index_item} for index_i in items]
 
     return jsonify(items_list)
+
+@app.route('/year-index1', methods=['GET'])
+def year_index1():
+    for i in ['History Taking', 'General Physical Examination', 'Emergency']:
+        existing_item = MD_pathology_1st_year_Clinical_Work.query.filter_by(index_item=i).first()
+
+        if not existing_item:
+            item = MD_pathology_1st_year_Clinical_Work(index_item=i)
+            db.session.add(item)
+    
+    db.session.commit()
+
+    items = MD_pathology_1st_year_Clinical_Work.query.all()
+
+    items_list = [{"id": index_i.id, "index_item": index_i.index_item} for index_i in items]
+
+    return jsonify(items_list)
+
+@app.route('/add-item', methods=['POST'])
+def add_item():
+    global email
+    data = request.get_json()
+    item_name = data.get('name')
+
+    user = User.query.filter_by(email=email).first()
+
+    user.logbook_field = item_name
+    db.session.commit()
+
+    return jsonify({"message": f"Item '{item_name}' added successfully!"}), 201
+
+@app.route('/add-item1', methods=['POST'])
+def add_item1():
+    global email
+    data = request.get_json()
+    item_name = data.get('name')
+
+    user = User.query.filter_by(email=email).first()
+
+    user.logbook_field1 = item_name
+    db.session.commit()
+
+    return jsonify({"message": f"Item '{item_name}' added successfully!"}), 201
 
 if __name__ == '__main__':
     with app.app_context():

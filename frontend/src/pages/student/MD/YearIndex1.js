@@ -2,13 +2,13 @@ import LogoHeader from "../../../components/student/MD/LogoHeader";
 import Button from "../../../components/student/MD/Button";
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
-import styles from "./YearIndex.module.css";
+import styles from "./YearIndex1.module.css";
 
-const YearIndex = () => {
+const YearIndex1 = () => {
   const [items, setItems] = useState([]);
 
   const handleList = (itemName) => {
-    axios.post('http://127.0.0.1:5000/add-item', { name: itemName })
+    axios.post('http://127.0.0.1:5000/add-item1', { name: itemName })
       .then(response => {
         console.log('Item added:', response.data);
       })
@@ -18,7 +18,7 @@ const YearIndex = () => {
   };
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:5000/year-index')
+    axios.get('http://127.0.0.1:5000/year-index1')
       .then(response => {
         setItems(response.data);
         console.log(response.data);
@@ -36,15 +36,15 @@ const YearIndex = () => {
           <div className={styles.leftColumn}>
             <div className={styles.logbookDropdown}>
               <div className={styles.dropdownLabel}>
-                <h1 className={styles.heading}>1st Year</h1>
+                <h1 className={styles.heading}>Clinical Work</h1>
                 <div className={styles.selectLogBook}>
-                  Select Log book field
+                  Double click on one of the procedure from below to continue 
                 </div>
               </div>
               <div className={styles.dropdown}>
               <ol>
                 {items.map(item => (
-                  <a href='year-index1'>
+                  <a href='/logbook-field'>
                   <li key={item.id} onClick={() => handleList(item.index_item)}>
                     <div className={styles.listIndex}>{item.id}.</div><div className={styles.listItem}>{item.index_item}</div>
                   </li>
@@ -68,4 +68,4 @@ const YearIndex = () => {
   );
 };
 
-export default YearIndex;
+export default YearIndex1;

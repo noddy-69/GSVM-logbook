@@ -1,0 +1,262 @@
+.heading {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  line-height: 58px;
+  font-weight: 700;
+  font-family: inherit;
+}
+.selectLogBook {
+  position: relative;
+  font-size: var(--font-size-lg);
+  line-height: 28px;
+  font-family: var(--text-regular-normal);
+}
+.dropdownLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-lg);
+}
+.dropdownIcon {
+  height: 48px;
+  width: 878px;
+  position: absolute;
+  margin: 0 !important;
+  top: -12px;
+  right: -135px;
+  border-radius: var(--br-9xs);
+  background-color: var(--neutral-2);
+}
+.clinicalWork,
+.placeholder {
+  position: relative;
+  line-height: 150%;
+  display: inline-block;
+  min-width: 14px;
+}
+.clinicalWork {
+  min-width: 93px;
+}
+.clinicalWorkLabel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-xl);
+  color: var(--black);
+}
+.historyTaking {
+  flex: 1;
+  position: relative;
+  line-height: 150%;
+}
+.examinationLabel {
+  border-radius: var(--br-9xs) var(--br-9xs) 0 0;
+  white-space: nowrap;
+}
+.examinationLabel,
+.examinationLabel1,
+.examinationLabel2 {
+  align-self: stretch;
+  background-color: var(--base);
+  border: 0.5px solid var(--grey);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: var(--padding-2xs) var(--padding-mini);
+}
+.examinationLabel1 {
+  white-space: nowrap;
+}
+.examinationLabel2 {
+  border-radius: 0 0 var(--br-9xs) var(--br-9xs);
+}
+.examinationCategories {
+  width: 338px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 100%;
+}
+.proceduresDone {
+  display: inline-block;
+  min-width: 123px;
+}
+.districtResidencyProgram,
+.proceduresDone {
+  position: relative;
+  line-height: 150%;
+}
+.activitiesLabel,
+.activitiesLabel2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-xl);
+}
+.activitiesLabel2 {
+  align-self: stretch;
+}
+.researchWork {
+  position: relative;
+  line-height: 150%;
+  display: inline-block;
+  min-width: 107px;
+}
+.activitiesLabel4 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-xl);
+  max-width: 100%;
+}
+.div7 {
+  position: relative;
+  line-height: 150%;
+  display: inline-block;
+  min-width: 23px;
+}
+.activitiesCategories {
+  align-self: stretch;
+  flex-direction: column;
+  gap: var(--gap-5xl);
+}
+.activitiesCategories,
+.dropdown,
+.workCategories {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 100%;
+}
+.workCategories {
+  flex: 1;
+  flex-direction: column;
+  gap: var(--gap-5xl);
+  z-index: 1;
+}
+.dropdown {
+  align-self: stretch;
+  flex-direction: row;
+  position: relative;
+  font-size: var(--text-regular-normal-size);
+  color: var(--grey);
+  font-family: var(--text-regular-normal);
+}
+.logbookDropdown {
+  width: 719px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-45xl);
+}
+.leftColumn,
+.leftColumnParent,
+.logbookDropdown {
+  display: flex;
+  justify-content: flex-start;
+  max-width: 100%;
+}
+.leftColumn {
+  align-self: stretch;
+  flex-direction: row;
+  align-items: flex-start;
+}
+.leftColumnParent {
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 112px;
+  text-align: left;
+  font-size: var(--font-size-29xl);
+  color: var(--black);
+  font-family: var(--font-rokkitt);
+}
+.yearSelectionInner {
+  width: 1384px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 0 var(--padding-45xl);
+  box-sizing: border-box;
+  max-width: 100%;
+}
+.yearSelection {
+  width: 100%;
+  position: relative;
+  background-color: var(--base);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 0 0 var(--padding-45xl);
+  box-sizing: border-box;
+  gap: var(--gap-53xl);
+  line-height: normal;
+  letter-spacing: normal;
+}
+ol {
+  width: 100%;
+}
+.listIndex {
+  margin: 15px;
+  display: flex;
+  width: max-content;
+}
+li {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  font-family: var(--text-regular-normal);
+}
+li:hover {
+  cursor: pointer;
+  background-color: var(--neutral-2);
+}
+@media screen and (max-width: 1200px) {
+  .yearSelectionInner {
+    padding-left: var(--padding-13xl);
+    padding-right: var(--padding-13xl);
+    box-sizing: border-box;
+  }
+}
+@media screen and (max-width: 1050px) {
+  .heading {
+    font-size: var(--font-size-19xl);
+    line-height: 46px;
+  }
+}
+@media screen and (max-width: 750px) {
+  .logbookDropdown {
+    gap: var(--gap-13xl);
+  }
+  .leftColumnParent {
+    gap: var(--gap-37xl);
+  }
+  .yearSelection {
+    gap: var(--gap-17xl);
+  }
+}
+@media screen and (max-width: 450px) {
+  .heading {
+    font-size: var(--font-size-10xl);
+    line-height: 35px;
+  }
+  .logbookDropdown {
+    gap: var(--gap-base);
+  }
+  .leftColumnParent {
+    gap: var(--gap-9xl);
+  }
+  .yearSelection {
+    gap: var(--gap-lg);
+  }
+}

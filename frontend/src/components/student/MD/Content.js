@@ -19,10 +19,12 @@ const Content = ({ className = "" }) => {
               </div>
             </div>
             <div className={styles.tablePreview}>
+              <a href="/clinical-work-historytaking">
               <div className={styles.entriesTable}>
                 <div className={styles.entriesTableChild} />
                 <div className={styles.entries}>Entries</div>
               </div>
+              </a>
               <div className={styles.entriesTable1}>
                 <div className={styles.entriesTableChild} />
                 <div className={styles.tableOverview}>Table overview</div>
