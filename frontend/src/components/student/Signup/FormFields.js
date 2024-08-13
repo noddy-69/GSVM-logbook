@@ -1,6 +1,6 @@
 import InputFields1 from "./InputFields1";
 import InputFields from "./InputFields";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from "prop-types";
 import styles from "./FormFields.module.css";
@@ -15,6 +15,7 @@ const SignupForm = () => {
   const [dob, setDOB] = useState('');
   const [department, setDepartment] = useState('');
   const navigate = useNavigate();
+  const [items, setItems] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,6 +27,19 @@ const SignupForm = () => {
       console.error('Error logging in:', error);
     }
   };
+
+  useEffect(() => {
+    axios.get('http://127.0.0.1:5000/')
+      .then(response => {
+        setItems(response.data);
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+
+
   return (
     <form onSubmit={handleSubmit} className={styles.formFields}>
       <div className={styles.submission}>
@@ -73,11 +87,11 @@ const SignupForm = () => {
         <div className={styles.textlabel}>Department*</div>
         <select name="department" id="language1" onChange={(e) => setDepartment(e.target.value)} required>
           <option value="Select one">Select one...</option>
-          <option value="medical">Medical</option>
-          <option value="humanities">Humanities</option>
-          <option value="neurology">Neurology</option>
-          <option value="orthopaedic">Orthopaedic</option>
-          <option value="physician">Physician</option>
+          <option value="Medical">Medical</option>
+          <option value="Humanities">Humanities</option>
+          <option value="Neurology">Neurology</option>
+          <option value="Orthopaedic">Orthopaedic</option>
+          <option value="Pathology">Pathology</option>
         </select>
       </div>
       <button type="submit" className={styles.signupButton}>Sign Up</button>
