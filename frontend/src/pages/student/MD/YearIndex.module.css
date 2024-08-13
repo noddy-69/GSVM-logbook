@@ -205,7 +205,7 @@
 ol {
   width: 100%;
 }
-.listIndex {
+.listItem {
   margin: 15px;
   display: flex;
   width: max-content;

@@ -64,12 +64,14 @@ class Faculty(db.Model):
 
 class Department(db.Model):
     __tablename__ = 'departments'
+    serial_number = db.Column(db.Integer, nullable=False, unique=True)
     department = db.Column(db.String(100), primary_key=True, unique=True, nullable=False)
 
     users = relationship('User', back_populates='departmentp')
     logbook_fields = relationship('LogbookField', back_populates='departmentp')
 
 class LogbookField(db.Model):
+    serial_number = db.Column(db.Integer, nullable=False, unique=True)
     __tablename__ = 'logbook_fields'
     department = db.Column(db.String(150), db.ForeignKey('departments.department'), nullable=False)
     year = db.Column(db.Enum('1st', '2nd', '3rd', name='year_enum'), nullable=False)
@@ -80,6 +82,7 @@ class LogbookField(db.Model):
 
 class Subfield(db.Model):
     __tablename__ = 'subfields'
+    serial_number = db.Column(db.Integer, nullable=False, unique=True)
     field_name = db.Column(db.String(150), db.ForeignKey('logbook_fields.field_name'), nullable=False)
     subfield_name = db.Column(db.String(100), nullable=False, primary_key=True)
 
@@ -88,6 +91,7 @@ class Subfield(db.Model):
 
 class InputField(db.Model):
     __tablename__ = 'input_fields'
+    serial_number = db.Column(db.Integer, nullable=False, unique=True)
     subfield_name = db.Column(db.String(150), db.ForeignKey('subfields.subfield_name'), nullable=False)
     input_field_name = db.Column(db.String(100), nullable=False, primary_key=True)
 
@@ -119,48 +123,45 @@ class MD_pathology_1st_year_Clinical_Work(db.Model):
 def generate_otp():
     return random.randint(1000,9999)
 
-def page_load():
-    for i in ['Pathology', 'Neurology', 'Orthopaedic']:
-        existing_item = Department.query.filter_by(department=i).first()
-
-        if not existing_item:
-            item = Department(department=i)
-            db.session.add(item)
-    
-    db.session.commit()
-    
-    items = Department.query.all()
-
-    items_list = [{"index_item": index_i.department} for index_i in items]
-
-    return jsonify(items_list)
 
 def logbook():
-    for d in ['Pathology']:
+    departments = ['Pathology']
+    years = ['1st', '2nd', '3rd']
+
+    for d in departments:
+        existing_item = Department.query.filter_by(department=d).first()
+
+        if not existing_item:
+            item = Department(serial_number=departments.index(d)+1, department=d)
+            db.session.add(item)
+
         if d == 'Pathology':
-            for y in ['1st']:
+            for y in years:
                 if y == '1st':
-                    for l in ['Clinical Work','Procedures Done','District Residency Program','Academic Activities','Group Discussion Presentation / Seminar / Self Directed Learning / Guest Lecture / Grand Round']:
+                    logbookfields = ['Clinical Work','Procedures Done','District Residency Program','Academic Activities','Group Discussion Presentation / Seminar / Self Directed Learning / Guest Lecture / Grand Round']
+                    for l in logbookfields:
                         existing_item = LogbookField.query.filter_by(department=d, year=y, field_name=l).first()
 
                         if not existing_item:
-                            item = LogbookField(department=d, year=y, field_name=l)
+                            item = LogbookField(serial_number=logbookfields.index(l)+1, department=d, year=y, field_name=l)
                             db.session.add(item)
 
                         if l == 'Clinical Work':
-                            for i in ['History Taking', 'General Physical Examination', 'Emergency']:
+                            subfields = ['History Taking', 'General Physical Examination', 'Emergency']
+                            for i in subfields:
                                 existing_item1 = Subfield.query.filter_by(field_name=l, subfield_name=i).first()
 
                                 if not existing_item1:
-                                    item1 = Subfield(field_name=l, subfield_name=i)
+                                    item1 = Subfield(serial_number=subfields.index(i)+1, field_name=l, subfield_name=i)
                                     db.session.add(item1)
 
                                 if i == 'History Taking':
-                                    for f in ['S.NO.', 'Date', 'UHID No', 'Diagnosis']:
+                                    inputfields = ['S.NO.', 'Date', 'UHID No', 'Diagnosis']
+                                    for f in inputfields:
                                         existing_item2 = InputField.query.filter_by(subfield_name=i, input_field_name=f).first()
 
                                         if not existing_item2:
-                                            item2 = InputField(subfield_name=i, input_field_name=f)
+                                            item2 = InputField(serial_number=inputfields.index(f)+1, subfield_name=i, input_field_name=f)
                                             db.session.add(item2)
                     
     db.session.commit()
@@ -177,7 +178,6 @@ def logbook():
 
 @app.route('/', methods=['GET'])
 def fill_tables():
-    a = page_load()
     b = logbook()
 
     if b:
@@ -452,35 +452,17 @@ def introduction1():
 
 @app.route('/year-index', methods=['GET'])
 def year_index():
-    for i in ['Clinical Work','Procedures Done','District Residency Program','Academic Activities','Group Discussion Presentation / Seminar / Self Directed Learning / Guest Lecture / Grand Round']:
-        existing_item = LogbookField.query.filter_by(field_name=i).first()
+    items = LogbookField.query.order_by(LogbookField.serial_number).all()
 
-        if not existing_item:
-            item = LogbookField(field_name=i)
-            db.session.add(item)
-    
-    db.session.commit()
-
-    items = LogbookField.query.all()
-
-    items_list = [{"index_item": index_i.field_name} for index_i in items]
+    items_list = [{'id':index_i.serial_number, "index_item": index_i.field_name} for index_i in items]
 
     return jsonify(items_list)
 
 @app.route('/year-index1', methods=['GET'])
 def year_index1():
-    for i in ['History Taking', 'General Physical Examination', 'Emergency']:
-        existing_item = MD_pathology_1st_year_Clinical_Work.query.filter_by(index_item=i).first()
+    items = Subfield.query.order_by(Subfield.serial_number).all()
 
-        if not existing_item:
-            item = MD_pathology_1st_year_Clinical_Work(index_item=i)
-            db.session.add(item)
-    
-    db.session.commit()
-
-    items = MD_pathology_1st_year_Clinical_Work.query.all()
-
-    items_list = [{"id": index_i.id, "index_item": index_i.index_item} for index_i in items]
+    items_list = [{'id':index_i.serial_number, "index_item": index_i.subfield_name} for index_i in items]
 
     return jsonify(items_list)
 
@@ -509,6 +491,18 @@ def add_item1():
     db.session.commit()
 
     return jsonify({"message": f"Item '{item_name}' added successfully!"}), 201
+
+@app.route('/clinical-work-historytaking', methods=['GET'])
+def input():
+    global email
+    user = User.query.filter_by(email=email).first()
+
+    if user:
+        logbookfield = user.logbook_field
+        subfield = user.logbook_field1
+        return jsonify({'logbookfield': f'{logbookfield}', 'subfield': f'{subfield}'})
+    else:
+        return jsonify({'name': 'no name', 'registration': 'no reg', 'name1': f'no prof name'})
 
 if __name__ == '__main__':
     with app.app_context():
