@@ -40,7 +40,8 @@ class User(db.Model):
     registration = db.Column(db.Integer, unique=True, nullable=False, primary_key=True)
     year = db.Column(db.Integer, nullable=False)
     dob = db.Column(db.Date, nullable=False)
-    department = db.Column(db.String(150), db.ForeignKey('departments.department'), nullable=False)
+    department_id = db.Column(db.Integer, db.ForeignKey('departments.department_id'), nullable=False)
+    department = db.Column(db.String(150), nullable=False)
     prof_name = db.Column(db.String(150), nullable=False, default=0)
     acknowledgement = db.Column(db.String(700), nullable=False, default=0)
     introduction = db.Column(db.String(700), nullable=False, default=0)
@@ -64,46 +65,48 @@ class Faculty(db.Model):
 
 class Department(db.Model):
     __tablename__ = 'departments'
-    serial_number = db.Column(db.Integer, nullable=False, unique=True)
-    department = db.Column(db.String(100), primary_key=True, unique=True, nullable=False)
+    department_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    department = db.Column(db.String(100), unique=True, nullable=False)
 
     users = relationship('User', back_populates='departmentp')
     logbook_fields = relationship('LogbookField', back_populates='departmentp')
 
 class LogbookField(db.Model):
-    serial_number = db.Column(db.Integer, nullable=False, unique=True)
     __tablename__ = 'logbook_fields'
-    department = db.Column(db.String(150), db.ForeignKey('departments.department'), nullable=False)
+    logbook_field_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    serial_number = db.Column(db.Integer, nullable=False)
+    department_id = db.Column(db.Integer, db.ForeignKey('departments.department_id'), nullable=False)
     year = db.Column(db.Enum('1st', '2nd', '3rd', name='year_enum'), nullable=False)
-    field_name = db.Column(db.String(100), nullable=False, primary_key=True)
+    field_name = db.Column(db.String(100), nullable=False)
 
     departmentp = relationship('Department', back_populates='logbook_fields')
     subfields = relationship('Subfield', back_populates='logbook_field')
 
 class Subfield(db.Model):
     __tablename__ = 'subfields'
-    serial_number = db.Column(db.Integer, nullable=False, unique=True)
-    field_name = db.Column(db.String(150), db.ForeignKey('logbook_fields.field_name'), nullable=False)
-    subfield_name = db.Column(db.String(100), nullable=False, primary_key=True)
+    subfield_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    serial_number = db.Column(db.Integer, nullable=False)
+    logbook_field_id = db.Column(db.Integer, db.ForeignKey('logbook_fields.logbook_field_id'), nullable=False)
+    subfield_name = db.Column(db.String(100), nullable=False)
 
     logbook_field = relationship('LogbookField', back_populates='subfields')
     input_fields = relationship('InputField', back_populates='subfield')
 
 class InputField(db.Model):
     __tablename__ = 'input_fields'
-    serial_number = db.Column(db.Integer, nullable=False, unique=True)
-    subfield_name = db.Column(db.String(150), db.ForeignKey('subfields.subfield_name'), nullable=False)
-    input_field_name = db.Column(db.String(100), nullable=False, primary_key=True)
+    input_field_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    subfield_id = db.Column(db.Integer, db.ForeignKey('subfields.subfield_id'), nullable=False)
+    input_field_name = db.Column(db.String(100), nullable=False)
 
     subfield = relationship('Subfield', back_populates='input_fields')
     entries = relationship('StudentEntry', back_populates='input_field')
 
 class StudentEntry(db.Model):
     __tablename__ = 'student_entries'
-    entry_id = db.Column(db.Integer, primary_key=True)
+    entry_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    subfield_name = db.Column(db.String(100), db.ForeignKey('subfields.subfield_name'), nullable=False)
-    input_field_name = db.Column(db.String(150), db.ForeignKey('input_fields.input_field_name'), nullable=False)
+    subfield_id = db.Column(db.Integer, db.ForeignKey('subfields.subfield_id'), nullable=False)
+    input_field_id = db.Column(db.Integer, db.ForeignKey('input_fields.input_field_id'), nullable=False)
     input_value = db.Column(db.String(150), nullable=False)
     entry_date = db.Column(db.DateTime, default=db.func.current_timestamp(), nullable=False)
 
@@ -132,7 +135,7 @@ def logbook():
         existing_item = Department.query.filter_by(department=d).first()
 
         if not existing_item:
-            item = Department(serial_number=departments.index(d)+1, department=d)
+            item = Department(department=d)
             db.session.add(item)
 
         if d == 'Pathology':
@@ -140,29 +143,59 @@ def logbook():
                 if y == '1st':
                     logbookfields = ['Clinical Work','Procedures Done','District Residency Program','Academic Activities','Group Discussion Presentation / Seminar / Self Directed Learning / Guest Lecture / Grand Round']
                     for l in logbookfields:
-                        existing_item = LogbookField.query.filter_by(department=d, year=y, field_name=l).first()
+                        department = Department.query.filter_by(department=d).first()
+                        department_id = department.department_id
+                        existing_item1 = LogbookField.query.filter_by(department_id=department_id, year=y, field_name=l).first()
 
-                        if not existing_item:
-                            item = LogbookField(serial_number=logbookfields.index(l)+1, department=d, year=y, field_name=l)
+                        if not existing_item1:
+                            item = LogbookField(serial_number=logbookfields.index(l)+1, department_id=department_id, year=y, field_name=l)
                             db.session.add(item)
 
                         if l == 'Clinical Work':
                             subfields = ['History Taking', 'General Physical Examination', 'Emergency']
-                            for i in subfields:
-                                existing_item1 = Subfield.query.filter_by(field_name=l, subfield_name=i).first()
+                        elif l == 'Procedures Done':
+                            subfields = ['Placement of IV Cannula', 'Use of IV Infusion Pump', 'Use of Glucometer']
+                        elif l == 'Academic Activities':
+                            subfields = ['No Display']
+                        elif l == 'Group Discussion Presentation / Seminar / Self Directed Learning / Guest Lecture / Grand Round':
+                            subfields = ['No Display1']
+                        else:
+                            subfields = []
 
-                                if not existing_item1:
-                                    item1 = Subfield(serial_number=subfields.index(i)+1, field_name=l, subfield_name=i)
-                                    db.session.add(item1)
+                        for i in subfields:
+                            logbook_field = LogbookField.query.filter_by(department_id=department_id, year=y, field_name=l).first()
+                            logbook_field_id = logbook_field.logbook_field_id
+                            
+                            existing_item2 = Subfield.query.filter_by(logbook_field_id=logbook_field_id, subfield_name=i).first()
 
-                                if i == 'History Taking':
-                                    inputfields = ['S.NO.', 'Date', 'UHID No', 'Diagnosis']
-                                    for f in inputfields:
-                                        existing_item2 = InputField.query.filter_by(subfield_name=i, input_field_name=f).first()
+                            if not existing_item2:
+                                item1 = Subfield(serial_number=subfields.index(i)+1, logbook_field_id=logbook_field_id, subfield_name=i)
+                                db.session.add(item1)
 
-                                        if not existing_item2:
-                                            item2 = InputField(serial_number=inputfields.index(f)+1, subfield_name=i, input_field_name=f)
-                                            db.session.add(item2)
+                            if i == 'History Taking':
+                                inputfields = ['S.NO.', 'Date', 'UHID_No', 'Diagnosis']
+                            elif i == 'General Physical Examination':
+                                inputfields = ['S.NO.', 'Date', 'UHID_No','Comment', 'Diagnosis']
+                            elif i == 'Emergency':
+                                inputfields = ['S.NO.', 'Date', 'UHID_No', 'Diagnosis']
+                            elif i == 'Placement of IV Cannula':
+                                inputfields = ['S.NO.', 'UHID_No', 'Procedure_Level', 'Diagnosis']
+                            elif i == 'No Display':
+                                inputfields = ['S.NO.', 'Topic', 'Journal_details', 'Comment', 'Presentation_date', 'Moderator']
+                            elif i == 'No Display1':
+                                inputfields = ['S.NO.', 'Topic', 'Program', 'Comment', 'Presentation_date', 'Moderator']                                
+                            else:
+                                inputfields = []
+
+                            for f in inputfields:
+                                subfield_name = Subfield.query.filter_by(logbook_field_id=logbook_field_id, subfield_name=i).first()
+                                subfield_id = subfield_name.subfield_id
+
+                                existing_item3 = InputField.query.filter_by(subfield_id=subfield_id, input_field_name=f).first()
+
+                                if not existing_item3:
+                                    item2 = InputField(subfield_id=subfield_id, input_field_name=f)
+                                    db.session.add(item2)
                     
     db.session.commit()
 
@@ -170,8 +203,6 @@ def logbook():
     items1 = Subfield.query.all()
     items2 = InputField.query.all()
 
-    items_list = [{"index_item": index_i.field_name} for index_i in items]
-    items_list1 = [{"index_item": index_i.subfield_name} for index_i in items1]
     items_list2 = [{"index_item": index_i.input_field_name} for index_i in items2]
 
     return jsonify(items_list2)
@@ -196,6 +227,9 @@ def signup():
     dob = data.get('dob')
     department = data.get('department')
 
+    department1 = Department.query.filter_by(department=department).first()
+    department_id = department1.department_id
+
     # Hash the password
     hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
 
@@ -210,7 +244,7 @@ def signup():
 
     else:
         # Create a new user instance
-        new_user = User( name=name, email=email, password=hashed_password, registration=registration, year=year, dob=dob , department=department )
+        new_user = User( name=name, email=email, password=hashed_password, registration=registration, year=year, dob=dob , department_id=department_id, department=department )
 
         try:
             # Add and commit the new user to the database
@@ -452,7 +486,7 @@ def introduction1():
 
 @app.route('/year-index', methods=['GET'])
 def year_index():
-    items = LogbookField.query.order_by(LogbookField.serial_number).all()
+    items = LogbookField.query.all()
 
     items_list = [{'id':index_i.serial_number, "index_item": index_i.field_name} for index_i in items]
 
@@ -460,9 +494,13 @@ def year_index():
 
 @app.route('/year-index1', methods=['GET'])
 def year_index1():
-    items = Subfield.query.order_by(Subfield.serial_number).all()
+    global email
+    user = User.query.filter_by(email=email).first()
 
-    items_list = [{'id':index_i.serial_number, "index_item": index_i.subfield_name} for index_i in items]
+    logbook_field_id = LogbookField.query.filter_by(department_id=user.department_id, field_name=user.logbook_field).first().logbook_field_id
+    items = Subfield.query.filter_by(logbook_field_id=logbook_field_id).all()
+
+    items_list = [{'id':index_i.serial_number, "index_item": index_i.subfield_name, "logbook_field": user.logbook_field} for index_i in items]
 
     return jsonify(items_list)
 
@@ -500,9 +538,39 @@ def input():
     if user:
         logbookfield = user.logbook_field
         subfield = user.logbook_field1
-        return jsonify({'logbookfield': f'{logbookfield}', 'subfield': f'{subfield}'})
+
+        subfield_id = Subfield.query.filter_by(subfield_name=subfield).first().subfield_id
+        fields = InputField.query.filter_by(subfield_id=subfield_id).all()
+
+        fields_list = [{"index_item": index_i.input_field_name} for index_i in fields]
+        # return jsonify({'logbookfield': f'{logbookfield}', 'subfield': f'{subfield}'})
+        return jsonify({'logbookfield': f'{logbookfield}', 'subfield': f'{subfield}', 'columnsToShow': f'{fields_list}'})
     else:
         return jsonify({'name': 'no name', 'registration': 'no reg', 'name1': f'no prof name'})
+    
+@app.route('/add-patients', methods=['POST'])
+def add_patients():
+    global email
+    data = request.get_json()
+
+    user = User.query.filter_by(email=email).first()
+    subfield = user.logbook_field1
+
+    logbook_field_id = LogbookField.query.filter_by(department_id=user.department_id).first().logbook_field_id
+    subfield_id = Subfield.query.filter_by(logbook_field_id=logbook_field_id, subfield_name=subfield).first().subfield_id
+    fields = InputField.query.filter_by(subfield_id=subfield_id).all()
+
+    for i in range(1,len(fields)):
+        field = fields[i].input_field_name
+        entry = data['patients'][0][field]
+
+        input_field_id = InputField.query.filter_by(subfield_id=subfield_id, input_field_name=field).first().input_field_id
+        new_entry = StudentEntry(user_id=user.id, subfield_id=subfield_id, input_field_id=input_field_id, input_value=entry)
+        db.session.add(new_entry)
+
+    db.session.commit()
+
+    return jsonify({"message": f"{data}"}), 201
 
 if __name__ == '__main__':
     with app.app_context():

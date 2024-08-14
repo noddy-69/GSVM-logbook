@@ -271,6 +271,17 @@ th, td {
   font-family: var(--text-regular-normal);
   border-radius: 5px;
 }
+.inputField3 {
+  width: 271px;
+  height: 48px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: var(--color-floralwhite);
+  box-sizing: border-box;
+  font-size: var(--text-regular-normal-size);
+  font-family: var(--text-regular-normal);
+  border-radius: 5px;
+}
 @media screen and (max-width: 1325px) {
   .patientDataTable {
     flex-wrap: wrap;

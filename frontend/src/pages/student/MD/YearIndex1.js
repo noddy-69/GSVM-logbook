@@ -6,6 +6,7 @@ import styles from "./YearIndex1.module.css";
 
 const YearIndex1 = () => {
   const [items, setItems] = useState([]);
+  const [logbookfield, setLogbookfield] = useState('');
 
   const handleList = (itemName) => {
     axios.post('http://127.0.0.1:5000/add-item1', { name: itemName })
@@ -21,6 +22,7 @@ const YearIndex1 = () => {
     axios.get('http://127.0.0.1:5000/year-index1')
       .then(response => {
         setItems(response.data);
+        setLogbookfield(response.data[0].logbook_field);
         console.log(response.data);
       })
       .catch(error => {
@@ -36,7 +38,7 @@ const YearIndex1 = () => {
           <div className={styles.leftColumn}>
             <div className={styles.logbookDropdown}>
               <div className={styles.dropdownLabel}>
-                <h1 className={styles.heading}>Clinical Work</h1>
+                <h1 className={styles.heading}>{logbookfield}</h1>
                 <div className={styles.selectLogBook}>
                   Double click on one of the procedure from below to continue 
                 </div>
