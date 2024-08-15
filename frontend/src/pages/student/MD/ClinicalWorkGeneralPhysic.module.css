@@ -1,25 +1,22 @@
-.enterInThe,
-.heading {
-  position: relative;
-  color: var(--black);
-  text-align: left;
-}
 .heading {
   margin: 0;
-  font-size: var(--font-size-29xl);
+  position: relative;
+  font-size: inherit;
   line-height: 58px;
   font-weight: 700;
-  font-family: var(--font-rokkitt);
-}
-.enterInThe {
-  width: 847px;
-  font-size: var(--font-size-lg);
-  line-height: 155%;
-  font-family: var(--text-regular-normal);
+  font-family: inherit;
   display: inline-block;
   max-width: 100%;
 }
-.tableHeader {
+.writeDownThe {
+  align-self: stretch;
+  position: relative;
+  font-size: var(--font-size-lg);
+  line-height: 155%;
+  font-family: var(--text-regular-normal);
+}
+.headingParent {
+  width: 847px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -27,167 +24,80 @@
   gap: var(--gap-lg);
   max-width: 100%;
 }
-.serialNumberPlaceholder,
+.serialNoInput,
 .sno {
   position: relative;
-  font-size: var(--text-regular-normal-size);
   line-height: 150%;
-  font-family: var(--text-regular-normal);
-  color: var(--black);
-  text-align: left;
   display: inline-block;
 }
 .sno {
   font-weight: 600;
   min-width: 41px;
 }
-.serialNumberPlaceholder {
+.serialNoInput {
   min-width: 18px;
 }
-.serialNumberInput {
+.serialNoField {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
   padding: 0 0 var(--padding-29xl) var(--padding-4xl);
 }
-.dateInputs {
+.detailFields {
   flex-direction: column;
   gap: var(--gap-61xl);
 }
-.dateColumn,
-.dateInputs,
-.patientData,
-.patientRow {
+.detailFields,
+.patientDataHeader,
+.patientDetails,
+.serialNoHeader {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
 }
-.dateColumn {
+.patientDetails {
   flex-direction: row;
   padding: 0 0 0 var(--padding-4xl);
 }
-.patientData,
-.patientRow {
+.patientDataHeader,
+.serialNoHeader {
   flex-direction: column;
   gap: var(--gap-13xl);
 }
-.patientRow {
-  width: 239px;
+.patientDataHeader {
+  width: 412px;
   flex-direction: row;
   justify-content: space-between;
+  max-width: 100%;
   gap: var(--gap-xl);
 }
-.comment,
-.performedWithAssistance {
+.diagnosis {
   position: relative;
-  font-size: var(--text-regular-normal-size);
   line-height: 150%;
-  font-family: var(--text-regular-normal);
-  text-align: left;
-}
-.comment {
   font-weight: 600;
-  color: var(--black);
   display: inline-block;
   min-width: 71px;
 }
-.performedWithAssistance {
-  color: var(--grey);
-}
-.vectorIcon {
-  width: 12.6px;
-  height: 7.1px;
-  position: relative;
-}
-.iconChevronDown {
-  width: 24px;
-  overflow: hidden;
-  flex-shrink: 0;
+.diagnosisParent {
+  width: 760px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: var(--padding-5xs) var(--padding-8xs);
-  box-sizing: border-box;
-}
-.diagnosisValue {
-  align-self: stretch;
-  flex: 1;
-  border-radius: var(--br-9xs);
-  border: 1px solid var(--grey);
-  flex-direction: row;
-  padding: var(--padding-xs) var(--padding-mini) var(--padding-xs)
-    var(--padding-base);
-  gap: var(--gap-5xl);
-}
-.diagnosisInputs,
-.diagnosisLabel,
-.diagnosisValue {
-  display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-}
-.diagnosisLabel {
-  align-self: stretch;
-  height: 92px;
-  flex-direction: column;
-  gap: var(--gap-xl);
-}
-.diagnosisInputs {
-  height: 49px;
-  border-radius: var(--br-9xs);
-  border: 1px solid var(--grey);
+  padding: 0 363px 0 0;
   box-sizing: border-box;
-  flex-direction: row;
-  padding: var(--padding-xs) var(--padding-mini) var(--padding-xs)
-    var(--padding-base);
-  gap: var(--gap-5xl);
-}
-.diagnosisColumn {
-  height: 1132px;
-  flex: 1;
-  flex-direction: column;
-  gap: var(--gap-37xl);
-  min-width: 176px;
-}
-.assistanceColumn,
-.diagnosisColumn,
-.diagnosisInputColumn,
-.diagnosisInputLabel {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-}
-.assistanceColumn {
-  width: 444px;
-  flex-direction: row;
-  gap: var(--gap-45xl);
+  gap: var(--gap-xl);
   max-width: 100%;
 }
-.diagnosisInputColumn,
-.diagnosisInputLabel {
-  flex-direction: column;
-}
-.diagnosisInputLabel {
-  align-self: stretch;
-  gap: var(--gap-xl);
-}
-.diagnosisInputColumn {
-  width: 425px;
-  padding: 0 var(--padding-9xl) 0 0;
-  box-sizing: border-box;
-  gap: 25px;
-  max-width: 100%;
-}
-.dividerChild {
+.frameChild {
   width: 0;
   flex: 1;
   position: relative;
   max-height: 100%;
   object-fit: contain;
 }
-.divider {
+.patientDataTableInner {
   height: 729px;
   width: 0;
   display: flex;
@@ -197,68 +107,186 @@
   padding: var(--padding-25xl) 0 0;
   box-sizing: border-box;
 }
-.tableBody {
-  justify-content: center;
+.patientDataTable {
+  display: inline-block;
+  justify-content: flex-start;
   gap: var(--gap-45xl);
   max-width: 100%;
+  font-size: var(--text-regular-normal-size);
+  font-family: var(--text-regular-normal);
 }
-.actions,
-.buttons,
-.tableBody {
+.tablehead {
+  font-size: var(--font-size-lgi);
+  font-family: var(--text-regular-normal);
+}
+.tablecontent {
+  display: flex;
+  justify-content: flex-start;
+  gap: var(--gap-45xl);
+  width: 100%;
+  font-size: var(--font-size-lgi);
+  font-family: var(--text-regular-normal);
+}
+.textinput {
+  width: 100%;
+}
+.actionButtons,
+.buttonContainer,
+.patientDataTable {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
 }
-.buttons {
+.actionButtons {
   height: 48px;
   justify-content: flex-start;
   gap: var(--gap-xl);
 }
-.actions {
+.buttonContainer {
   align-self: stretch;
+  align-self: flex-end;
   justify-content: flex-end;
   padding: 0 var(--padding-xl);
 }
-.patientDetails,
-.patientTable {
+.historyInstructions,
+.patientHistory {
   display: flex;
   align-items: flex-start;
   max-width: 100%;
 }
-.patientTable {
-  margin: 0;
+.historyInstructions {
   flex: 1;
   flex-direction: column;
   justify-content: flex-start;
   gap: var(--gap-45xl);
+  text-align: left;
+  font-size: var(--font-size-29xl);
+  color: var(--black);
+  font-family: var(--font-rokkitt);
 }
-.patientDetails {
-  width: 1388px;
+.patientHistory {
+  width: fit-content;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: flex-start;
   padding: 0 var(--padding-25xl);
   box-sizing: border-box;
 }
-.clinicalWorkGeneralPhysic {
+.clinicalWorkHistoryTaking {
   width: 100%;
+  height: 100%;
   position: relative;
   background-color: var(--base);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
   justify-content: flex-start;
-  padding: 0 0 var(--padding-45xl);
+  padding: 0 40px var(--padding-45xl);
   box-sizing: border-box;
   gap: var(--gap-53xl);
   line-height: normal;
   letter-spacing: normal;
 }
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 20px 40px;
+  border: 1px solid #ccc;
+  text-align: left;
+  font-size: var(--font-size-lgi);
+  font-family: var(--text-regular-normal);
+}
+.serial {
+  text-align: end;
+  font-size: var(--text-regular-normal-size);
+  font-family: var(--text-regular-normal);
+}
+.max {
+  font-size: var(--font-size-xs);
+  text-align: end;
+  color: #A0A0A0;
+}
+.button {
+  border-radius: var(--br-9xs);
+  border-color: var(--green);
+  background-color: var(--green);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-xs) var(--padding-17xl);
+  text-align: left;
+  font-size: var(--text-regular-normal-size);
+  color: var(--white);
+  font-family: var(--text-regular-normal);
+}
+.button1 {
+  border-radius: var(--br-9xs);
+  border-color: var(--green);
+  background-color: var(--base);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-xs) var(--padding-17xl);
+  text-align: left;
+  font-size: var(--text-regular-normal-size);
+  color: var(--green);
+  font-family: var(--text-regular-normal);
+}
+
+.inputField {
+  text-align: center;
+  width: 134px;
+  height: 48px;
+  padding: 10px;
+  background-color: var(--color-floralwhite);
+  box-sizing: border-box;
+  font-size: var(--text-regular-normal-size);
+  font-family: var(--text-regular-normal);
+  border-radius: 5px;
+}
+.inputField1 {
+  text-align: center;
+  width: 109px;
+  height: 48px;
+  padding: 10px;
+  background-color: var(--color-floralwhite);
+  box-sizing: border-box;
+  font-size: var(--text-regular-normal-size);
+  font-family: var(--text-regular-normal);
+  border-radius: 5px;
+}
+.inputField2 {
+  width: 397px;
+  height: 48px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: var(--color-floralwhite);
+  box-sizing: border-box;
+  font-size: var(--text-regular-normal-size);
+  font-family: var(--text-regular-normal);
+  border-radius: 5px;
+}
+.inputField3 {
+  width: 271px;
+  height: 48px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: var(--color-floralwhite);
+  box-sizing: border-box;
+  font-size: var(--text-regular-normal-size);
+  font-family: var(--text-regular-normal);
+  border-radius: 5px;
+}
 @media screen and (max-width: 1325px) {
-  .tableBody {
+  .patientDataTable {
     flex-wrap: wrap;
   }
-  .patientDetails {
+  .patientHistory {
     padding-left: var(--padding-3xl);
     padding-right: var(--padding-3xl);
     box-sizing: border-box;
@@ -269,15 +297,19 @@
     font-size: var(--font-size-19xl);
     line-height: 46px;
   }
-  .divider {
+  .diagnosisParent {
+    padding-right: 181px;
+    box-sizing: border-box;
+  }
+  .patientDataTableInner {
     padding-top: var(--padding-10xl);
     box-sizing: border-box;
   }
-  .patientTable,
-  .tableBody {
+  .historyInstructions,
+  .patientDataTable {
     gap: var(--gap-13xl);
   }
-  .clinicalWorkGeneralPhysic {
+  .clinicalWorkHistoryTaking {
     gap: var(--gap-17xl);
   }
 }
@@ -286,18 +318,78 @@
     font-size: var(--font-size-10xl);
     line-height: 35px;
   }
-  .diagnosisColumn {
-    gap: var(--gap-9xl);
-  }
-  .assistanceColumn {
+  .patientDataHeader {
     flex-wrap: wrap;
-    gap: var(--gap-13xl);
   }
-  .patientTable,
-  .tableBody {
+  .diagnosisParent {
+    padding-right: var(--padding-xl);
+    box-sizing: border-box;
+  }
+  .historyInstructions,
+  .patientDataTable {
     gap: var(--gap-base);
   }
-  .clinicalWorkGeneralPhysic {
+  .clinicalWorkHistoryTaking {
     gap: var(--gap-lg);
   }
+}
+
+.clinicalWorkHistoryTaking {
+  font-family: 'Arial', sans-serif;
+  padding: 20px;
+}
+
+.heading {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.instructions {
+  margin-bottom: 20px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.table th {
+  background-color: #f2f2f2;
+}
+
+.diagnosisColumn {
+  max-width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.verified {
+  color: green;
+  font-weight: bold;
+}
+
+.pending {
+  color: red;
+  font-weight: bold;
+}
+
+.submitButton {
+  background-color: #004d40;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.submitButton:hover {
+  background-color: #00332e;
 }

@@ -141,7 +141,7 @@ def logbook():
         if d == 'Pathology':
             for y in years:
                 if y == '1st':
-                    logbookfields = ['Clinical Work','Procedures Done','District Residency Program','Academic Activities','Group Discussion Presentation / Seminar / Self Directed Learning / Guest Lecture / Grand Round']
+                    logbookfields = ['Clinical Work','Procedures Done','District Residency Program','Academic Activities (Journal Club)','Group Discussion Presentation / Seminar / Self Directed Learning / Guest Lecture / Grand Round']
                     for l in logbookfields:
                         department = Department.query.filter_by(department=d).first()
                         department_id = department.department_id
@@ -515,7 +515,7 @@ def add_item():
     user.logbook_field = item_name
     db.session.commit()
 
-    return jsonify({"message": f"Item '{item_name}' added successfully!"}), 201
+    return jsonify(item_name), 201
 
 @app.route('/add-item1', methods=['POST'])
 def add_item1():
@@ -571,6 +571,53 @@ def add_patients():
     db.session.commit()
 
     return jsonify({"message": f"{data}"}), 201
+
+@app.route('/clinical-work-general-physical-examination', methods=['GET'])
+def get_patient_data():
+    global email
+    user = User.query.filter_by(email=email).first()
+
+    if user:
+        logbookfield = user.logbook_field
+        subfield = user.logbook_field1
+
+        subfield_id = Subfield.query.filter_by(subfield_name=subfield).first().subfield_id
+        fields = InputField.query.filter_by(subfield_id=subfield_id).all()
+
+        # List of column names
+        fields_list = [index_i.input_field_name for index_i in fields]
+        fields_list1 = [index_i.input_field_id for index_i in fields]
+
+        # Fetch patient records
+        records = StudentEntry.query.filter(StudentEntry.subfield_id.in_([subfield_id])).all()
+        record1 = [index_i.input_value for index_i in records]
+    
+        organized_records = []
+        current_patient = {}
+        for record in records:
+            current_patient = {}    
+            if record.input_field_id == 2:  # Date
+                current_patient['Date'] = record.input_value
+            elif record.input_field_id == 3:  # UHID No.
+                current_patient['UHID_No'] = record.input_value
+            elif record.input_field_id == 4:  # Diagnosis
+                current_patient['Diagnosis'] = record.input_value
+
+            # Once all fields for a patient are filled, add to the list and reset
+      
+            organized_records.append(current_patient)
+       
+
+        # Return JSON response with correct structure
+        return jsonify({
+            'logbookfield': logbookfield,
+            'subfield': subfield,
+            'columnsToShow': fields_list,  # Return as list
+            'patients_items': organized_records,  # Return as list
+            'check': record1
+        })
+    else:
+        return jsonify({'name': 'no name', 'registration': 'no reg', 'name1': 'no prof name'})
 
 if __name__ == '__main__':
     with app.app_context():

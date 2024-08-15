@@ -1,16 +1,24 @@
 import LogoHeader from "../../../components/student/MD/LogoHeader";
 import Button from "../../../components/student/MD/Button";
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import styles from "./YearIndex.module.css";
 
 const YearIndex = () => {
   const [items, setItems] = useState([]);
+  const navigate = useNavigate();
 
   const handleList = (itemName) => {
     axios.post('http://127.0.0.1:5000/add-item', { name: itemName })
       .then(response => {
         console.log('Item added:', response.data);
+        if (response.data == 'Clinical Work' || response.data == 'Procedures Done') {
+          navigate('/year-index1');
+        }
+        else {
+          navigate('/clinical-work-historytaking');
+        }
       })
       .catch(error => {
         console.error('Error adding item:', error);
@@ -44,11 +52,11 @@ const YearIndex = () => {
               <div className={styles.dropdown}>
               <ol>
                 {items.map(item => (
-                  <a href='year-index1'>
+                  
                   <li key={item.id} onClick={() => handleList(item.index_item)}>
                     <div className={styles.listIndex}>{item.id}.</div><div className={styles.listItem}>{item.index_item}</div>
                   </li>
-                  </a>
+
                 ))}
               </ol>
               </div>

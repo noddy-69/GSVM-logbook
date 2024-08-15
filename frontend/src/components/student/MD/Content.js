@@ -25,10 +25,12 @@ const Content = ({ className = "" }) => {
                 <div className={styles.entries}>Entries</div>
               </div>
               </a>
+              <a href="/clinical-work-general-physical-examination">
               <div className={styles.entriesTable1}>
                 <div className={styles.entriesTableChild} />
                 <div className={styles.tableOverview}>Table overview</div>
               </div>
+              </a>
             </div>
           </div>
         </div>

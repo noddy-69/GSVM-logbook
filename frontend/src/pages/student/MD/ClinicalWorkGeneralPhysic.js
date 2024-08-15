@@ -1,290 +1,154 @@
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import styles from "./ClinicalWorkHistoryTaking.module.css";
 import LogoHeader from "../../../components/student/MD/LogoHeader";
-import DataHeaders from "../../../components/student/MD/DataHeaders";
-import DiagnosisFields from "../../../components/student/MD/DiagnosisFields";
-import Button from "../../../components/student/MD/Button";
-import styles from "./ClinicalWorkGeneralPhysic.module.css";
 
-const ClinicalWorkGeneralPhysic = () => {
+const ClinicalWorkHistoryTaking = () => {
+  const [logbookfield, setLogbookfield] = useState('');
+  const [subfield, setSubfield] = useState('');
+  const [columnsToShow, setColumnsToShow] = useState([]);
+  const [patients, setPatients] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios.get('http://127.0.0.1:5000/clinical-work-general-physical-examination')
+      .then(response => {
+        console.log(response.data); // Inspect the API response
+        setLogbookfield(response.data.logbookfield);
+        setSubfield(response.data.subfield);
+        setColumnsToShow(response.data.columnsToShow || []);
+        setPatients(response.data.patients_items || []);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+
+  const addPatientRow = () => {
+    setPatients([...patients, { sno: patients.length + 1, Date: '', Topic: '', Journal_details: '', Program: '', UHID_No: '', Comment: 'Value1', Procedure_Level: 'Value1', Diagnosis: '', Presentation_date: '', Moderator: '' }]);
+  };
+
+  const handleInputChange = (index, event) => {
+    const { name, value } = event.target;
+    const newPatients = patients.map((patient, i) => {
+      if (i === index) {
+        return { ...patient, [name]: value };
+      }
+      return patient;
+    });
+    setPatients(newPatients);
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.post('http://127.0.0.1:5000/add-patients', { patients });
+      console.log(response.data);
+      navigate('/clinical-work-general-physical-examination');
+    } catch (error) {
+      console.error('Error submitting data:', error);
+    }
+  };
+
   return (
-    <div className={styles.clinicalWorkGeneralPhysic}>
+    <div className={styles.clinicalWorkHistoryTaking}>
       <LogoHeader untitledDesign11="/untitleddesign1-11@2x.png" />
-      <main className={styles.patientDetails}>
-        <form className={styles.patientTable}>
-          <div className={styles.tableHeader}>
-            <h1 className={styles.heading}>
-              Clinical Work – General Physical Examination
-            </h1>
-            <div className={styles.enterInThe}>
-              Enter in the table details of the admitted patients on whom
-              general physical examination was performed and presented before
-              your consultant. A minimum of 100 cases are to be recorded
+      <main className={styles.patientHistory}>
+        <section className={styles.historyInstructions}>
+          <div className={styles.headingParent}>
+            <h1 className={styles.heading}>{logbookfield} - {subfield}</h1>
+            <div className={styles.writeDownThe}>
+              Write down the details of patients whose history has been taken by
+              you and presented before consultant. A minimum of 100 cases are to
+              be recorded.
             </div>
           </div>
-          <div className={styles.tableBody}>
-            <div className={styles.patientRow}>
-              <div className={styles.patientData}>
-                <div className={styles.sno}>S.NO.</div>
-                <div className={styles.serialNumberInput}>
-                  <div className={styles.serialNumberPlaceholder}>01</div>
-                </div>
-                <div className={styles.dateColumn}>
-                  <div className={styles.dateInputs}>
-                    <div className={styles.serialNumberPlaceholder}>02</div>
-                    <div className={styles.serialNumberPlaceholder}>03</div>
-                    <div className={styles.serialNumberPlaceholder}>04</div>
-                    <div className={styles.serialNumberPlaceholder}>05</div>
-                    <div className={styles.serialNumberPlaceholder}>06</div>
-                    <div className={styles.serialNumberPlaceholder}>07</div>
-                    <div className={styles.serialNumberPlaceholder}>08</div>
-                    <div className={styles.serialNumberPlaceholder}>09</div>
-                    <div className={styles.serialNumberPlaceholder}>10</div>
-                    <div className={styles.serialNumberPlaceholder}>11</div>
-                  </div>
-                </div>
-              </div>
-              <DataHeaders
-                propMinWidth="unset"
-                date="Date"
-                propMinWidth1="33px"
-                dDMMYYYY="DD/MM/YYYY"
-                propMinWidth2="102px"
-                dDMMYYYY1="DD/MM/YYYY"
-                propMinWidth3="102px"
-                dDMMYYYY2="DD/MM/YYYY"
-                propMinWidth4="102px"
-                dDMMYYYY3="DD/MM/YYYY"
-                propMinWidth5="102px"
-                dDMMYYYY4="DD/MM/YYYY"
-                propMinWidth6="102px"
-                dDMMYYYY5="DD/MM/YYYY"
-                propMinWidth7="102px"
-                dDMMYYYY6="DD/MM/YYYY"
-                propMinWidth8="102px"
-                dDMMYYYY7="DD/MM/YYYY"
-                propMinWidth9="102px"
-                dDMMYYYY8="DD/MM/YYYY"
-                propMinWidth10="102px"
-                dDMMYYYY9="DD/MM/YYYY"
-                propMinWidth11="102px"
-                dDMMYYYY10="DD/MM/YYYY"
-                propMinWidth12="102px"
-              />
-            </div>
-            <div className={styles.assistanceColumn}>
-              <DataHeaders
-                propMinWidth="109px"
-                date="UHID No"
-                propMinWidth1="62px"
-                dDMMYYYY="xx02912xx"
-                propMinWidth2="77px"
-                dDMMYYYY1="xx02912xx"
-                propMinWidth3="77px"
-                dDMMYYYY2="xx02912xx"
-                propMinWidth4="77px"
-                dDMMYYYY3="xx02912xx"
-                propMinWidth5="77px"
-                dDMMYYYY4="xx02912xx"
-                propMinWidth6="77px"
-                dDMMYYYY5="xx02912xx"
-                propMinWidth7="77px"
-                dDMMYYYY6="xx02912xx"
-                propMinWidth8="77px"
-                dDMMYYYY7="xx02912xx"
-                propMinWidth9="77px"
-                dDMMYYYY8="xx02912xx"
-                propMinWidth10="77px"
-                dDMMYYYY9="xx02912xx"
-                propMinWidth11="77px"
-                dDMMYYYY10="xx02912xx"
-                propMinWidth12="77px"
-              />
-              <div className={styles.diagnosisColumn}>
-                <div className={styles.diagnosisLabel}>
-                  <div className={styles.comment}>Comment</div>
-                  <div className={styles.diagnosisValue}>
-                    <div className={styles.performedWithAssistance}>
-                      Performed with assistance
-                    </div>
-                    <div className={styles.iconChevronDown}>
-                      <img
-                        className={styles.vectorIcon}
-                        alt=""
-                        src="/vector.svg"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className={styles.diagnosisInputs}>
-                  <div className={styles.performedWithAssistance}>
-                    Performed with assistance
-                  </div>
-                  <div className={styles.iconChevronDown}>
-                    <img
-                      className={styles.vectorIcon}
-                      alt=""
-                      src="/vector.svg"
-                    />
-                  </div>
-                </div>
-                <div className={styles.diagnosisInputs}>
-                  <div className={styles.performedWithAssistance}>
-                    Performed with assistance
-                  </div>
-                  <div className={styles.iconChevronDown}>
-                    <img
-                      className={styles.vectorIcon}
-                      alt=""
-                      src="/vector.svg"
-                    />
-                  </div>
-                </div>
-                <div className={styles.diagnosisInputs}>
-                  <div className={styles.performedWithAssistance}>
-                    Performed with assistance
-                  </div>
-                  <div className={styles.iconChevronDown}>
-                    <img
-                      className={styles.vectorIcon}
-                      alt=""
-                      src="/vector.svg"
-                    />
-                  </div>
-                </div>
-                <div className={styles.diagnosisInputs}>
-                  <div className={styles.performedWithAssistance}>
-                    Performed with assistance
-                  </div>
-                  <div className={styles.iconChevronDown}>
-                    <img
-                      className={styles.vectorIcon}
-                      alt=""
-                      src="/vector.svg"
-                    />
-                  </div>
-                </div>
-                <div className={styles.diagnosisInputs}>
-                  <div className={styles.performedWithAssistance}>
-                    Performed with assistance
-                  </div>
-                  <div className={styles.iconChevronDown}>
-                    <img
-                      className={styles.vectorIcon}
-                      alt=""
-                      src="/vector.svg"
-                    />
-                  </div>
-                </div>
-                <div className={styles.diagnosisInputs}>
-                  <div className={styles.performedWithAssistance}>
-                    Performed with assistance
-                  </div>
-                  <div className={styles.iconChevronDown}>
-                    <img
-                      className={styles.vectorIcon}
-                      alt=""
-                      src="/vector.svg"
-                    />
-                  </div>
-                </div>
-                <div className={styles.diagnosisInputs}>
-                  <div className={styles.performedWithAssistance}>
-                    Performed with assistance
-                  </div>
-                  <div className={styles.iconChevronDown}>
-                    <img
-                      className={styles.vectorIcon}
-                      alt=""
-                      src="/vector.svg"
-                    />
-                  </div>
-                </div>
-                <div className={styles.diagnosisInputs}>
-                  <div className={styles.performedWithAssistance}>
-                    Performed with assistance
-                  </div>
-                  <div className={styles.iconChevronDown}>
-                    <img
-                      className={styles.vectorIcon}
-                      alt=""
-                      src="/vector.svg"
-                    />
-                  </div>
-                </div>
-                <div className={styles.diagnosisInputs}>
-                  <div className={styles.performedWithAssistance}>
-                    Performed with assistance
-                  </div>
-                  <div className={styles.iconChevronDown}>
-                    <img
-                      className={styles.vectorIcon}
-                      alt=""
-                      src="/vector.svg"
-                    />
-                  </div>
-                </div>
-                <div className={styles.diagnosisInputs}>
-                  <div className={styles.performedWithAssistance}>
-                    Performed with assistance
-                  </div>
-                  <div className={styles.iconChevronDown}>
-                    <img
-                      className={styles.vectorIcon}
-                      alt=""
-                      src="/vector.svg"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className={styles.diagnosisInputColumn}>
-              <div className={styles.diagnosisInputLabel}>
-                <div className={styles.comment}>Diagnosis</div>
-                <DiagnosisFields propPadding="unset" />
-              </div>
-              <DiagnosisFields propPadding="unset" />
-              <DiagnosisFields propPadding="unset" />
-              <DiagnosisFields propPadding="unset" />
-              <DiagnosisFields propPadding="unset" />
-              <DiagnosisFields propPadding="unset" />
-              <DiagnosisFields propPadding="unset" />
-              <DiagnosisFields propPadding="unset" />
-              <DiagnosisFields propPadding="unset" />
-              <DiagnosisFields propPadding="unset" />
-              <DiagnosisFields propPadding="unset" />
-            </div>
-            <div className={styles.divider}>
-              <img
-                className={styles.dividerChild}
-                loading="lazy"
-                alt=""
-                src="/line-17.svg"
-              />
-            </div>
-          </div>
-          <div className={styles.actions}>
-            <div className={styles.buttons}>
-              <Button
-                textLabel="Add Patient"
-                propBackgroundColor="unset"
-                propHeight="49px"
-                propBorder="1px solid #007066"
-                propMinWidth="83px"
-                propColor="#007066"
-              />
-              <Button
-                textLabel="Submit"
-                propBackgroundColor="#007066"
-                propHeight="unset"
-                propBorder="unset"
-                propMinWidth="51px"
-                propColor="#fff"
-              />
-            </div>
-          </div>
-        </form>
+          <table className={styles.table}>
+            <thead className={styles.tablehead}>
+              <tr>
+                {columnsToShow.includes('S.NO.') && <th>S.NO.</th>}
+                {columnsToShow.includes('Date') && <th>Date</th>}
+                {columnsToShow.includes('Topic') && <th>Topic</th>}
+                {columnsToShow.includes('Journal_details') && <th>Journal details</th>}
+                {columnsToShow.includes('Program') && <th>Program</th>}
+                {columnsToShow.includes('UHID_No') && <th>UHID No</th>}
+                {columnsToShow.includes('Comment') && <th>Comment</th>}
+                {columnsToShow.includes('Procedure_Level') && <th>Procedure Level</th>}
+                {columnsToShow.includes('Diagnosis') && <th>Diagnosis</th>}
+                {columnsToShow.includes('Presentation_date') && <th>Presentation Date</th>}
+                {columnsToShow.includes('Moderator') && <th>Moderator</th>}
+              </tr>
+            </thead>
+            <tbody>
+              {patients.map((patient, index) => (
+                <tr key={index}>
+                  {columnsToShow.includes('S.NO.') && (
+                    <td className={styles.serial}>{index + 1}</td>
+                  )}
+                  {columnsToShow.includes('Date') && (
+                    <td>
+                      {patient.Date}
+                    </td>
+                  )}
+                  {columnsToShow.includes('Topic') && (
+                    <td>
+                      {patient.Topic}
+                    </td>
+                  )}
+                  {columnsToShow.includes('Journal_details') && (
+                    <td>
+                      {patient.Journal_details}
+                    </td>
+                  )}
+                  {columnsToShow.includes('Program') && (
+                    <td>
+                      {patient.Program}
+                    </td>
+                  )}
+                  {columnsToShow.includes('UHID_No') && (
+                    <td>
+                      {patient.UHID_No}
+                    </td>
+                  )}
+                  {columnsToShow.includes('Comment') && (
+                    <td>
+                      {patient.Comment}
+                    </td>
+                  )}
+                  {columnsToShow.includes('Procedure_Level') && (
+                    <td>
+                      {patient.Procedure_Level}
+                    </td>
+                  )}
+                  {columnsToShow.includes('Diagnosis') && (
+                    <td>
+                      {patient.Diagnosis}
+                    </td>
+                  )}
+                  {columnsToShow.includes('Presentation_date') && (
+                    <td>
+                      {patient.Presentation_Date}
+                    </td>
+                  )}
+                  {columnsToShow.includes('Moderator') && (
+                    <td>
+                      {patient.Moderator}
+                    </td>
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </section>
       </main>
+      <div className={styles.buttonContainer}>
+        <div className={styles.actionButtons}>
+          <button onClick={addPatientRow} className={styles.button1}>Add Patient</button>
+          <button onClick={handleSubmit} className={styles.button}>Submit</button>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default ClinicalWorkGeneralPhysic;
+export default ClinicalWorkHistoryTaking;
