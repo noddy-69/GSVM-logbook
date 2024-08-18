@@ -33,7 +33,7 @@ db = SQLAlchemy(app)
 # User model
 class User(db.Model):
     __tablename__ = 'users'
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)
     name = db.Column(db.String(150), nullable=False)
     email = db.Column(db.String(150), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
@@ -54,7 +54,7 @@ class User(db.Model):
     entries = relationship('StudentEntry', back_populates='user')
 
 class Faculty(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)
     name = db.Column(db.String(150), nullable=False)
     email = db.Column(db.String(150), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
@@ -65,7 +65,7 @@ class Faculty(db.Model):
 
 class Department(db.Model):
     __tablename__ = 'departments'
-    department_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    department_id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)
     department = db.Column(db.String(100), unique=True, nullable=False)
 
     users = relationship('User', back_populates='departmentp')
@@ -73,7 +73,7 @@ class Department(db.Model):
 
 class LogbookField(db.Model):
     __tablename__ = 'logbook_fields'
-    logbook_field_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    logbook_field_id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)
     serial_number = db.Column(db.Integer, nullable=False)
     department_id = db.Column(db.Integer, db.ForeignKey('departments.department_id'), nullable=False)
     year = db.Column(db.Enum('1st', '2nd', '3rd', name='year_enum'), nullable=False)
@@ -84,7 +84,7 @@ class LogbookField(db.Model):
 
 class Subfield(db.Model):
     __tablename__ = 'subfields'
-    subfield_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    subfield_id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)
     serial_number = db.Column(db.Integer, nullable=False)
     logbook_field_id = db.Column(db.Integer, db.ForeignKey('logbook_fields.logbook_field_id'), nullable=False)
     subfield_name = db.Column(db.String(100), nullable=False)
@@ -94,7 +94,7 @@ class Subfield(db.Model):
 
 class InputField(db.Model):
     __tablename__ = 'input_fields'
-    input_field_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    input_field_id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)
     subfield_id = db.Column(db.Integer, db.ForeignKey('subfields.subfield_id'), nullable=False)
     input_field_name = db.Column(db.String(100), nullable=False)
 
@@ -103,7 +103,7 @@ class InputField(db.Model):
 
 class StudentEntry(db.Model):
     __tablename__ = 'student_entries'
-    entry_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    entry_id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     subfield_id = db.Column(db.Integer, db.ForeignKey('subfields.subfield_id'), nullable=False)
     input_field_id = db.Column(db.Integer, db.ForeignKey('input_fields.input_field_id'), nullable=False)
@@ -115,11 +115,11 @@ class StudentEntry(db.Model):
     input_field = relationship('InputField', back_populates='entries')
 
 class MD_pathology_1st_year(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)
     index_item = db.Column(db.String(150), nullable=False)
 
 class MD_pathology_1st_year_Clinical_Work(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)
     index_item = db.Column(db.String(150), nullable=False)
 
 # Generate OTP
